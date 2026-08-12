@@ -1,0 +1,525 @@
+/* ==========================================================================
+   UNION PRINT - 1:1 EXACT FIGMA MOBILE LANDING PAGE
+   ========================================================================== */
+
+:root {
+  --primary-lime: #9CE214;
+  --primary-lime-glow: rgba(156, 226, 20, 0.35);
+  --primary-lime-hover: #b3f71c;
+  
+  --bg-dark: #05080c;
+  --card-bg: rgba(22, 28, 20, 0.72);
+  --card-bg-hover: rgba(28, 36, 25, 0.85);
+  --card-border: rgba(156, 226, 20, 0.22);
+  --card-border-hover: rgba(156, 226, 20, 0.6);
+  
+  --text-white: #FFFFFF;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --icon-dark: #0d1506;
+  
+  --font-main: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius-card: 26px;
+  
+  --transition-fast: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 15px;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(circle at 80% 20%, rgba(156, 226, 20, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 20% 80%, rgba(156, 226, 20, 0.12) 0%, transparent 50%);
+  color: var(--text-white);
+  line-height: 1.45;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 0;
+}
+
+/* Ambient Container */
+.ambient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Page Wrapper (Mobile Phone Frame Container matching Figma 1:1) */
+.page-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  min-height: 880px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  background-image: url('assets/bg.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  border-radius: 32px;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.95), 0 0 25px rgba(156, 226, 20, 0.12);
+  border: 1px solid rgba(156, 226, 20, 0.2);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 2. HEADER & BRAND LOGO SECTION */
+.hero-section {
+  padding: 32px 0 14px 0;
+  text-align: center;
+}
+
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.figma-brand-logo {
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 16px rgba(156, 226, 20, 0.25));
+}
+
+.subtitle-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.sub-white {
+  color: #FFFFFF;
+}
+
+.sub-lime {
+  color: var(--primary-lime);
+}
+
+.sub-pill-bar {
+  width: 48px;
+  height: 2px;
+  background: var(--primary-lime);
+  margin: 8px auto 12px auto;
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--primary-lime-glow);
+}
+
+.services-pills-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 20px;
+}
+
+.pill-dot {
+  color: var(--primary-lime);
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+/* 3. MAIN CARDS GRID (1:1 FIGMA Mockup Styling) */
+.main-content {
+  flex: 1;
+  padding-bottom: 16px;
+}
+
+.cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.figma-card {
+  position: relative;
+  width: 100%;
+  min-height: 78px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: var(--text-white);
+  transition: var(--transition-fast);
+  cursor: pointer;
+}
+
+.figma-card:hover {
+  background: var(--card-bg-hover);
+  border-color: var(--card-border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(156, 226, 20, 0.25);
+}
+
+/* Left Lime Icon */
+.card-left-icon {
+  flex-shrink: 0;
+  margin-right: 14px;
+}
+
+.figma-icon-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 16px rgba(156, 226, 20, 0.35);
+  display: block;
+  object-fit: contain;
+  transition: var(--transition-fast);
+}
+
+.figma-card:hover .figma-icon-img {
+  transform: scale(1.06);
+  box-shadow: 0 0 22px rgba(156, 226, 20, 0.6);
+}
+
+/* Card Text Details */
+.card-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+
+.card-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--text-white);
+  line-height: 1.2;
+}
+
+.card-value {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--primary-lime);
+  line-height: 1.2;
+}
+
+.card-subtitle-muted {
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Ish vaqti Vertical Divider */
+.vertical-card-divider {
+  width: 1.5px;
+  height: 36px;
+  background: rgba(156, 226, 20, 0.28);
+  margin: 0 16px 0 2px;
+}
+
+/* Right Chevron Arrow */
+.card-right-action {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.chevron-arrow {
+  width: 22px;
+  height: 22px;
+  color: var(--primary-lime);
+  stroke-width: 2.8;
+  transition: var(--transition-fast);
+}
+
+.figma-card:hover .chevron-arrow {
+  transform: translateX(3px);
+}
+
+/* 4. FOOTER SECTION */
+.site-footer {
+  padding: 20px 0 28px 0;
+  text-align: center;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-divider-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.divider-line {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(156, 226, 20, 0.4), transparent);
+}
+
+.footer-brand-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--primary-lime);
+  letter-spacing: 0.18em;
+}
+
+.footer-slogan {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-social-icons {
+  display: flex;
+  gap: 14px;
+  margin: 2px 0;
+}
+
+.social-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.footer-icon-img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+  transition: var(--transition-fast);
+}
+
+.social-icon-link:hover .footer-icon-img {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 8px var(--primary-lime-glow));
+}
+
+.footer-copy {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* 5. MODALS SYSTEM */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.glass-modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #0d121c;
+  border: 1.5px solid var(--primary-lime);
+  border-radius: 24px;
+  padding: 24px 20px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.85);
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--text-white);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--primary-lime);
+  color: var(--icon-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-header h2 {
+  font-size: 1.25rem;
+  color: var(--text-white);
+}
+
+.sub-text {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.catalog-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 18px;
+}
+
+.catalog-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.catalog-table th {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 10px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.catalog-table td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+}
+
+.table-price {
+  font-weight: 700;
+  color: var(--primary-lime);
+}
+
+.catalog-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.yandex-map-container {
+  width: 100%;
+  height: 250px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1.5px solid var(--primary-lime);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  margin-bottom: 12px;
+}
+
+.yandex-map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.btn-primary {
+  background: var(--primary-lime);
+  color: var(--icon-dark);
+  border: none;
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.btn-primary:hover {
+  background: var(--primary-lime-hover);
+  box-shadow: 0 0 20px var(--primary-lime-glow);
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* 6. MOBILE RESPONSIVE MEDIA QUERIES */
+@media (max-width: 480px) {
+  body {
+    padding: 0;
+    align-items: flex-start;
+  }
+
+  .page-wrapper {
+    max-width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+}
