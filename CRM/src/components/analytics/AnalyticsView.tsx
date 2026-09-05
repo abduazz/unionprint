@@ -68,20 +68,26 @@ export const AnalyticsView: React.FC = () => {
           </div>
 
           <div className="space-y-3">
-            {categoryList.map(cat => (
-              <div key={cat.category} className="space-y-1">
-                <div className="flex items-center justify-between text-xs font-bold">
-                  <span className="text-neutral-900">{t(`cat_${cat.category}`) || cat.category}</span>
-                  <span className="text-neutral-700">{formatMoney(cat.sum)} ({cat.percentage}%)</span>
-                </div>
-                <div className="w-full h-2 bg-neutral-100 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-black transition-all duration-300"
-                    style={{ width: `${cat.percentage}%` }}
-                  />
-                </div>
+            {categoryList.length === 0 ? (
+              <div className="py-8 text-center text-xs font-bold text-neutral-400 uppercase tracking-wider">
+                Данных по категориям пока нет
               </div>
-            ))}
+            ) : (
+              categoryList.map(cat => (
+                <div key={cat.category} className="space-y-1">
+                  <div className="flex items-center justify-between text-xs font-bold">
+                    <span className="text-neutral-900">{t(`cat_${cat.category}`) || cat.category}</span>
+                    <span className="text-neutral-700">{formatMoney(cat.sum)} ({cat.percentage}%)</span>
+                  </div>
+                  <div className="w-full h-2 bg-neutral-100 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-black transition-all duration-300"
+                      style={{ width: `${cat.percentage}%` }}
+                    />
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
@@ -96,24 +102,30 @@ export const AnalyticsView: React.FC = () => {
           </div>
 
           <div className="space-y-3">
-            {employees.map(emp => (
-              <div key={emp.id} className="flex items-center justify-between p-3 rounded-lg border border-neutral-100 bg-neutral-50/50">
-                <div className="flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-lg ${emp.avatarBg || 'bg-black'} text-white font-black text-xs flex items-center justify-center`}>
-                    {emp.name.split(' ').map(n => n[0]).join('')}
-                  </div>
-                  <div>
-                    <div className="text-xs font-black text-neutral-900">{emp.name}</div>
-                    <div className="text-[10px] font-bold text-neutral-400">{emp.role}</div>
-                  </div>
-                </div>
-
-                <div className="text-right text-xs font-bold">
-                  <div className="text-neutral-900 font-black">{emp.completedOrdersCount} выполненных</div>
-                  <div className="text-[10px] text-neutral-400">{formatMoney(emp.monthlyCurrentAmount)}</div>
-                </div>
+            {employees.length === 0 ? (
+              <div className="py-8 text-center text-xs font-bold text-neutral-400 uppercase tracking-wider">
+                Сотрудников пока нет
               </div>
-            ))}
+            ) : (
+              employees.map(emp => (
+                <div key={emp.id} className="flex items-center justify-between p-3 rounded-lg border border-neutral-100 bg-neutral-50/50">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-lg ${emp.avatarBg || 'bg-black'} text-white font-black text-xs flex items-center justify-center`}>
+                      {emp.name.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div>
+                      <div className="text-xs font-black text-neutral-900">{emp.name}</div>
+                      <div className="text-[10px] font-bold text-neutral-400">{emp.role}</div>
+                    </div>
+                  </div>
+
+                  <div className="text-right text-xs font-bold">
+                    <div className="text-neutral-900 font-black">{emp.completedOrdersCount} выполненных</div>
+                    <div className="text-[10px] text-neutral-400">{formatMoney(emp.monthlyCurrentAmount)}</div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>

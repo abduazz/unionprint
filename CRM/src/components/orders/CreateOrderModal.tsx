@@ -115,8 +115,8 @@ export const CreateOrderModal: React.FC = () => {
       finishings: selectedFinishings,
       totalAmount,
       paidAmount,
-      assignedStaffId: assignedStaffId || 'emp-1',
-      assignedStaffName: assignedStaff ? `${assignedStaff.name} (${t(`all_roles`).slice(0, 4)})` : 'Азиз Рахимов',
+      assignedStaffId: assignedStaffId || '',
+      assignedStaffName: assignedStaff ? assignedStaff.name : 'Не назначен',
       deadline,
       notes,
     });

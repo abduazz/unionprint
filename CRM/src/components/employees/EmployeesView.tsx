@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToggleLeft, ToggleRight } from 'lucide-react';
+import { ToggleLeft, ToggleRight, Users } from 'lucide-react';
 import { useCRM } from '../../context/CRMContext';
 import { useLanguage } from '../../context/LanguageContext';
 import type { EmployeeRole, ShiftStatus } from '../../types/crm';
@@ -71,94 +71,112 @@ export const EmployeesView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Employee Roster Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredEmployees.map(emp => {
-          const progressPercent = Math.min(Math.round((emp.monthlyCurrentAmount / (emp.monthlyTargetAmount || 1)) * 100), 100);
+      {filteredEmployees.length === 0 ? (
+        <div className="bg-white border border-dashed border-neutral-200 rounded-xl p-12 text-center space-y-3">
+          <div className="w-12 h-12 rounded-full bg-neutral-100 text-neutral-400 flex items-center justify-center mx-auto">
+            <Users className="w-6 h-6" />
+          </div>
+          <div className="text-sm font-black text-neutral-900">Сотрудников пока нет</div>
+          <p className="text-xs text-neutral-500 font-bold max-w-sm mx-auto">
+            Добавьте членов вашей команды (печатников, дизайнеров, менеджеров продаж), чтобы распределять заказы
+          </p>
+          <button
+            onClick={() => setIsCreateEmployeeModalOpen(true)}
+            className="mt-2 bg-black hover:bg-neutral-800 text-white rounded-lg px-4 py-2 text-xs font-bold transition shadow-xs cursor-pointer inline-flex items-center gap-1.5"
+          >
+            <span>+ Добавить первого сотрудника</span>
+          </button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredEmployees.map(emp => {
+            const progressPercent = Math.min(Math.round((emp.monthlyCurrentAmount / (emp.monthlyTargetAmount || 1)) * 100), 100);
 
-          return (
-            <div 
-              key={emp.id}
-              className="bg-white border border-neutral-200 hover:border-neutral-300 rounded-xl p-5 shadow-2xs hover:shadow-xs transition-all duration-150 space-y-4 flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-9 h-9 rounded-lg ${emp.avatarBg || 'bg-black'} text-white font-black text-xs flex items-center justify-center shadow-xs`}>
-                      {emp.name.split(' ').map(n => n[0]).join('')}
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-black text-neutral-900 leading-tight">{emp.name}</h3>
-                      <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider">
-                        {getRoleLabel(emp.role)}
+            return (
+              <div 
+                key={emp.id}
+                className="bg-white border border-neutral-200 hover:border-neutral-300 rounded-xl p-5 shadow-2xs hover:shadow-xs transition-all duration-150 space-y-4 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-9 h-9 rounded-lg ${emp.avatarBg || 'bg-black'} text-white font-black text-xs flex items-center justify-center shadow-xs`}>
+                        {emp.name.split(' ').map(n => n[0]).join('')}
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-black text-neutral-900 leading-tight">{emp.name}</h3>
+                        <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider">
+                          {getRoleLabel(emp.role)}
+                        </div>
                       </div>
                     </div>
+
+                    {/* Interactive Status Selector */}
+                    <select
+                      value={emp.status}
+                      onChange={(e) => setEmployeeStatus(emp.id, e.target.value as ShiftStatus)}
+                      className="text-[10px] font-extrabold px-2 py-1 rounded-md border outline-none bg-neutral-50 hover:bg-white transition cursor-pointer"
+                    >
+                      <option value="on_shift">🟢 НА СМЕНЕ</option>
+                      <option value="in_production">🟣 В ПЕЧАТИ</option>
+                      <option value="off_duty">⚪ ВЫХОДНОЙ</option>
+                    </select>
                   </div>
 
-                  {/* Interactive Status Selector */}
-                  <select
-                    value={emp.status}
-                    onChange={(e) => setEmployeeStatus(emp.id, e.target.value as ShiftStatus)}
-                    className="text-[10px] font-extrabold px-2 py-1 rounded-md border outline-none bg-neutral-50 hover:bg-white transition cursor-pointer"
+                  <div className="space-y-1 text-xs font-bold text-neutral-600 pt-2 border-t border-neutral-100">
+                    <div className="flex items-center justify-between text-neutral-500">
+                      <span>Текущие заказы:</span>
+                      <span className="font-black text-neutral-900">{emp.activeOrdersCount} в работе</span>
+                    </div>
+                    <div className="flex items-center justify-between text-neutral-500">
+                      <span>Выполнено всего:</span>
+                      <span className="font-black text-neutral-900">{emp.completedOrdersCount} заказов</span>
+                    </div>
+                  </div>
+
+                  {/* Performance Plan Bar */}
+                  <div className="pt-3">
+                    <div className="flex items-center justify-between text-[10px] font-bold text-neutral-400 mb-1">
+                      <span>ПЛАН ПРОДАЖ / ПЕЧАТИ</span>
+                      <span>{progressPercent}%</span>
+                    </div>
+                    <div className="w-full h-2 bg-neutral-100 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-black transition-all duration-300"
+                        style={{ width: `${progressPercent}%` }}
+                      />
+                    </div>
+                    <div className="text-[10px] font-bold text-neutral-500 mt-1 flex justify-between">
+                      <span>{formatMoney(emp.monthlyCurrentAmount)}</span>
+                      <span>{formatMoney(emp.monthlyTargetAmount)}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom shift toggle */}
+                <div className="pt-3 border-t border-neutral-100 flex items-center justify-between">
+                  <span className="text-xs font-bold text-neutral-500">Переключить смену</span>
+                  <button
+                    onClick={() => toggleEmployeeShift(emp.id)}
+                    className="px-3 py-1 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-xs font-bold rounded-lg transition cursor-pointer flex items-center gap-1.5"
                   >
-                    <option value="on_shift">🟢 НА СМЕНЕ</option>
-                    <option value="in_production">🟣 В ПЕЧАТИ</option>
-                    <option value="off_duty">⚪ ВЫХОДНОЙ</option>
-                  </select>
-                </div>
-
-                <div className="space-y-1 text-xs font-bold text-neutral-600 pt-2 border-t border-neutral-100">
-                  <div className="flex items-center justify-between text-neutral-500">
-                    <span>Текущие заказы:</span>
-                    <span className="font-black text-neutral-900">{emp.activeOrdersCount} в работе</span>
-                  </div>
-                  <div className="flex items-center justify-between text-neutral-500">
-                    <span>Выполнено всего:</span>
-                    <span className="font-black text-neutral-900">{emp.completedOrdersCount} заказов</span>
-                  </div>
-                </div>
-
-                {/* Performance Plan Bar */}
-                <div className="pt-3">
-                  <div className="flex items-center justify-between text-[10px] font-bold text-neutral-400 mb-1">
-                    <span>ПЛАН ПРОДАЖ / ПЕЧАТИ</span>
-                    <span>{progressPercent}%</span>
-                  </div>
-                  <div className="w-full h-2 bg-neutral-100 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-black transition-all duration-300"
-                      style={{ width: `${progressPercent}%` }}
-                    />
-                  </div>
-                  <div className="text-[10px] font-bold text-neutral-500 mt-1 flex justify-between">
-                    <span>{formatMoney(emp.monthlyCurrentAmount)}</span>
-                    <span>{formatMoney(emp.monthlyTargetAmount)}</span>
-                  </div>
+                    {emp.status === 'on_shift' ? (
+                      <ToggleRight className="w-4 h-4 text-emerald-600" />
+                    ) : emp.status === 'in_production' ? (
+                      <ToggleRight className="w-4 h-4 text-purple-600" />
+                    ) : (
+                      <ToggleLeft className="w-4 h-4 text-neutral-400" />
+                    )}
+                    <span>
+                      {emp.status === 'on_shift' ? 'На смене' : emp.status === 'in_production' ? 'В печати' : 'Выходной'}
+                    </span>
+                  </button>
                 </div>
               </div>
-
-              {/* Bottom shift toggle */}
-              <div className="pt-3 border-t border-neutral-100 flex items-center justify-between">
-                <span className="text-xs font-bold text-neutral-500">Переключить смену</span>
-                <button
-                  onClick={() => toggleEmployeeShift(emp.id)}
-                  className="px-3 py-1 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-xs font-bold rounded-lg transition cursor-pointer flex items-center gap-1.5"
-                >
-                  {emp.status === 'on_shift' ? (
-                    <ToggleRight className="w-4 h-4 text-emerald-600" />
-                  ) : emp.status === 'in_production' ? (
-                    <ToggleRight className="w-4 h-4 text-purple-600" />
-                  ) : (
-                    <ToggleLeft className="w-4 h-4 text-neutral-400" />
-                  )}
-                  <span>
-                    {emp.status === 'on_shift' ? 'На смене' : emp.status === 'in_production' ? 'В печати' : 'Выходной'}
-                  </span>
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* Modal create employee */}
       <Modal

@@ -71,6 +71,9 @@ interface CRMContextType {
   
   addTransaction: (transaction: Omit<Transaction, 'id' | 'date'>) => void;
   restockMaterial: (stockId: string, addedQty: number) => void;
+  addStockItem: (item: Omit<StockItem, 'id' | 'status' | 'lastRestocked'>) => void;
+  deleteStockItem: (id: string) => void;
+  clearAllData: () => void;
 
   // Stage Actions
   addStage: (title: string, variant: BadgeVariant) => void;
@@ -79,6 +82,18 @@ interface CRMContextType {
 }
 
 const CRMContext = createContext<CRMContextType | undefined>(undefined);
+
+const DB_VERSION = 'v2_clean';
+if (typeof window !== 'undefined') {
+  if (localStorage.getItem('unionprint_db_version') !== DB_VERSION) {
+    localStorage.removeItem('unionprint_orders');
+    localStorage.removeItem('unionprint_clients');
+    localStorage.removeItem('unionprint_employees');
+    localStorage.removeItem('unionprint_transactions');
+    localStorage.removeItem('unionprint_stock');
+    localStorage.setItem('unionprint_db_version', DB_VERSION);
+  }
+}
 
 export const CRMProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [orders, setOrders] = useState<Order[]>(() => {
@@ -170,7 +185,7 @@ export const CRMProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         amount: newOrder.paidAmount,
         description: `Предоплата за заказ ${num} (${newOrder.clientName})`,
         relatedOrderId: id,
-        operatorName: newOrder.assignedStaffName || 'Азиз Рахимов',
+        operatorName: newOrder.assignedStaffName || 'Оператор',
       });
     }
   };
@@ -263,6 +278,35 @@ export const CRMProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }));
   };
 
+  const addStockItem = (itemData: Omit<StockItem, 'id' | 'status' | 'lastRestocked'>) => {
+    const id = `stk-${Date.now()}`;
+    const status = itemData.quantity <= itemData.minThreshold ? (itemData.quantity <= itemData.minThreshold / 2 ? 'critical' : 'low') : 'ok';
+    const newStock: StockItem = {
+      ...itemData,
+      id,
+      status,
+      lastRestocked: new Date().toISOString().split('T')[0],
+    };
+    setStock(prev => [newStock, ...prev]);
+  };
+
+  const deleteStockItem = (id: string) => {
+    setStock(prev => prev.filter(s => s.id !== id));
+  };
+
+  const clearAllData = () => {
+    setOrders([]);
+    setClients([]);
+    setEmployees([]);
+    setTransactions([]);
+    setStock([]);
+    localStorage.removeItem('unionprint_orders');
+    localStorage.removeItem('unionprint_clients');
+    localStorage.removeItem('unionprint_employees');
+    localStorage.removeItem('unionprint_transactions');
+    localStorage.removeItem('unionprint_stock');
+  };
+
   // Stage Actions
   const addStage = (title: string, variant: BadgeVariant) => {
     const id = `stg-${Date.now()}`;
@@ -332,6 +376,9 @@ export const CRMProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setEmployeeStatus,
       addTransaction,
       restockMaterial,
+      addStockItem,
+      deleteStockItem,
+      clearAllData,
       addStage,
       updateStage,
       deleteStage,

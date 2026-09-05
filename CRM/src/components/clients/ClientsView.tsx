@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, Building } from 'lucide-react';
+import { Phone, Mail, Building, Users } from 'lucide-react';
 import { useCRM } from '../../context/CRMContext';
 import { useLanguage } from '../../context/LanguageContext';
 import type { ClientStatus } from '../../types/crm';
@@ -22,7 +22,7 @@ export const ClientsView: React.FC = () => {
   const [phone, setPhone] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [status, setStatus] = React.useState<ClientStatus>('lead');
-  const [assignedStaffName, setAssignedStaffName] = React.useState('Азиз Рахимов');
+  const [assignedStaffName, setAssignedStaffName] = React.useState('');
   const [notes] = React.useState('');
 
   const filteredClients = clients.filter(cli => 
@@ -73,56 +73,74 @@ export const ClientsView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Grid of Client Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredClients.map(cli => (
-          <div 
-            key={cli.id}
-            className="bg-white border border-neutral-200 hover:border-neutral-300 rounded-xl p-5 shadow-2xs hover:shadow-xs transition-all duration-150 space-y-4 flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-black text-white font-black text-xs flex items-center justify-center">
-                    {cli.name.charAt(0)}
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-black text-neutral-900 leading-tight">{cli.name}</h3>
-                    {cli.company && (
-                      <div className="text-[10px] font-bold text-neutral-400 flex items-center gap-1">
-                        <Building className="w-3 h-3" />
-                        <span>{cli.company}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                {getStatusBadge(cli.status)}
-              </div>
-
-              <div className="space-y-1 text-xs font-bold text-neutral-600 pt-2 border-t border-neutral-100">
-                <div className="flex items-center gap-2 text-neutral-500">
-                  <Phone className="w-3.5 h-3.5" />
-                  <span>{cli.phone}</span>
-                </div>
-                <div className="flex items-center gap-2 text-neutral-500">
-                  <Mail className="w-3.5 h-3.5" />
-                  <span className="truncate">{cli.email}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-3 border-t border-neutral-100 flex items-center justify-between text-xs font-bold">
-              <div>
-                <span className="text-[10px] text-neutral-400 block font-normal uppercase">Выполнено заказов</span>
-                <span className="font-black text-neutral-900">{cli.totalOrdersCount} шт</span>
-              </div>
-              <div className="text-right">
-                <span className="text-[10px] text-neutral-400 block font-normal uppercase">LTV (Всего заказов)</span>
-                <span className="font-black text-neutral-900">{formatMoney(cli.totalSpent)}</span>
-              </div>
-            </div>
+      {filteredClients.length === 0 ? (
+        <div className="bg-white border border-dashed border-neutral-200 rounded-xl p-12 text-center space-y-3">
+          <div className="w-12 h-12 rounded-full bg-neutral-100 text-neutral-400 flex items-center justify-center mx-auto">
+            <Users className="w-6 h-6" />
           </div>
-        ))}
-      </div>
+          <div className="text-sm font-black text-neutral-900">Клиентов пока нет</div>
+          <p className="text-xs text-neutral-500 font-bold max-w-sm mx-auto">
+            Зарегистрируйте первого заказчика, чтобы оформлять заказы и сохранять контактные данные
+          </p>
+          <button
+            onClick={() => setIsCreateClientModalOpen(true)}
+            className="mt-2 bg-black hover:bg-neutral-800 text-white rounded-lg px-4 py-2 text-xs font-bold transition shadow-xs cursor-pointer inline-flex items-center gap-1.5"
+          >
+            <span>+ Добавить первого клиента</span>
+          </button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredClients.map(cli => (
+            <div 
+              key={cli.id}
+              className="bg-white border border-neutral-200 hover:border-neutral-300 rounded-xl p-5 shadow-2xs hover:shadow-xs transition-all duration-150 space-y-4 flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-black text-white font-black text-xs flex items-center justify-center">
+                      {cli.name.charAt(0)}
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-black text-neutral-900 leading-tight">{cli.name}</h3>
+                      {cli.company && (
+                        <div className="text-[10px] font-bold text-neutral-400 flex items-center gap-1">
+                          <Building className="w-3 h-3" />
+                          <span>{cli.company}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {getStatusBadge(cli.status)}
+                </div>
+
+                <div className="space-y-1 text-xs font-bold text-neutral-600 pt-2 border-t border-neutral-100">
+                  <div className="flex items-center gap-2 text-neutral-500">
+                    <Phone className="w-3.5 h-3.5" />
+                    <span>{cli.phone}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-neutral-500">
+                    <Mail className="w-3.5 h-3.5" />
+                    <span className="truncate">{cli.email}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-neutral-100 flex items-center justify-between text-xs font-bold">
+                <div>
+                  <span className="text-[10px] text-neutral-400 block font-normal uppercase">Выполнено заказов</span>
+                  <span className="font-black text-neutral-900">{cli.totalOrdersCount} шт</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-[10px] text-neutral-400 block font-normal uppercase">LTV (Всего заказов)</span>
+                  <span className="font-black text-neutral-900">{formatMoney(cli.totalSpent)}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Create Client Modal */}
       <Modal
