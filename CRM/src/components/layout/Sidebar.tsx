@@ -96,9 +96,9 @@ export const Sidebar: React.FC = () => {
               </div>
             ) : (
               <img 
-                src="/logo.png" 
+                src="/logo-icon.png" 
                 alt="UnionPrint" 
-                className="w-9 h-9 object-contain shrink-0" 
+                className="w-10 h-10 object-contain shrink-0" 
               />
             )}
           </div>
