@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:zip": "tsc -b && vite build && rm -f deploy/crm_site.zip && cd dist && zip -r ../deploy/crm_site.zip . && cd ..",
     "lint": "oxlint",
     "preview": "vite preview"
   },
