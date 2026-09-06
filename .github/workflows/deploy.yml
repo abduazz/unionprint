@@ -1,0 +1,60 @@
+name: Deploy UnionPrint (Main Site & CRM) to ISPmanager
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  # 1. Сборка и деплой CRM
+  deploy-crm:
+    name: ⚙️ Build & Deploy CRM
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🔨 Install dependencies & Build CRM
+        working-directory: ./CRM
+        run: |
+          npm ci
+          npm run build
+
+      - name: 🚀 Upload CRM to Server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_CRM_DIR || 'crm.unionprint.uz/' }}
+          local-dir: ./CRM/dist/
+          dangerous-clean-slate: false
+
+  # 2. Деплой основного сайта
+  deploy-main-site:
+    name: 🌐 Deploy Main Website
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Prepare main site files
+        run: |
+          mkdir -p ./deploy_main
+          cp -r index.html style.css script.js favicon.ico assets bio ./deploy_main/
+
+      - name: 🚀 Upload Main Site to Server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_MAIN_DIR || 'unionprint.uz/' }}
+          local-dir: ./deploy_main/
+          dangerous-clean-slate: false

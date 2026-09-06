@@ -9,6 +9,7 @@ export const translations: Record<Language, Record<string, string>> = {
     nav_employees: 'Сотрудники & Производство',
     nav_accounting: 'Учет & Материалы',
     nav_analytics: 'Аналитика & Отчеты',
+    nav_superadmin: 'Супер Админ',
 
     // Titles & Subtitles
     kanban_subtitle: 'Интерактивное управление воронкой полиграфических заказов',
@@ -17,6 +18,7 @@ export const translations: Record<Language, Record<string, string>> = {
     employees_subtitle: 'Загрузка персонала, смены и продуктивность производства',
     accounting_subtitle: 'Финансовый учет, кассовые операции и остатки сырья',
     analytics_subtitle: 'Анализ выручки, популярных услуг и эффективности',
+    superadmin_subtitle: 'Управление доступом, учетными записями работников и безопасностью',
 
     // Kanban Stages
     stage_new: 'Новый запрос',
@@ -122,6 +124,7 @@ export const translations: Record<Language, Record<string, string>> = {
     nav_employees: 'Xodimlar & Ishlab chiqarish',
     nav_accounting: 'Hisob & Materiallar',
     nav_analytics: 'Tahlil & Hisobotlar',
+    nav_superadmin: 'Super Admin',
 
     // Titles & Subtitles
     kanban_subtitle: 'Matbaa buyurtmalari voronkasini boshqarish',
@@ -130,6 +133,7 @@ export const translations: Record<Language, Record<string, string>> = {
     employees_subtitle: 'Xodimlar yuklamasi va mahsuldorlik',
     accounting_subtitle: 'Moliyaviy hisob, kassa operatsiyalari va xomashyo zaxirasi',
     analytics_subtitle: 'Tushum va samaradorlik tahlili',
+    superadmin_subtitle: 'Xodimlar akkauntlari, ruxsatlar va xavfsizlik boshqaruvi',
 
     // Kanban Stages
     stage_new: 'Yangi soʻrov',
@@ -235,6 +239,7 @@ export const translations: Record<Language, Record<string, string>> = {
     nav_employees: 'Staff & Production',
     nav_accounting: 'Accounting & Stock',
     nav_analytics: 'Analytics & Reports',
+    nav_superadmin: 'Super Admin',
 
     // Titles & Subtitles
     kanban_subtitle: 'Interactive printing order pipeline management',
@@ -243,6 +248,7 @@ export const translations: Record<Language, Record<string, string>> = {
     employees_subtitle: 'Staff workload, shifts, and production efficiency',
     accounting_subtitle: 'Financial accounting, cash transactions, and raw materials',
     analytics_subtitle: 'Revenue analysis, top services, and efficiency metrics',
+    superadmin_subtitle: 'Access control, staff worker accounts, and security management',
 
     // Kanban Stages
     stage_new: 'New Lead',

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Plus, Download, Search } from 'lucide-react';
+import { Plus, Download, Search, ArrowLeftCircle, AlertTriangle } from 'lucide-react';
 import { useCRM } from '../../context/CRMContext';
+import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { exportOrdersToCSV, exportClientsToCSV, exportTransactionsToCSV } from '../../utils/exportToCsv';
 
@@ -20,6 +21,7 @@ export const Header: React.FC = () => {
     setIsTransactionModalOpen
   } = useCRM();
 
+  const { isImpersonating, currentUser, stopImpersonating } = useAuth();
   const { t } = useLanguage();
 
   const getPageInfo = () => {
@@ -36,6 +38,8 @@ export const Header: React.FC = () => {
         return { title: t('nav_accounting'), subtitle: t('accounting_subtitle') };
       case 'analytics':
         return { title: t('nav_analytics'), subtitle: t('analytics_subtitle') };
+      case 'superadmin':
+        return { title: t('nav_superadmin'), subtitle: t('superadmin_subtitle') };
       default:
         return { title: 'UnionPrint CRM', subtitle: '' };
     }
@@ -73,16 +77,36 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-      {/* Left side title & subtitle */}
-      <div>
-        <h1 className="text-xl md:text-2xl font-black text-neutral-900 tracking-tight">
-          {title}
-        </h1>
-        <p className="text-xs text-neutral-500 font-bold mt-0.5">
-          {subtitle}
-        </p>
-      </div>
+    <div>
+      {/* Impersonation alert banner */}
+      {isImpersonating && (
+        <div className="mb-4 bg-amber-500 text-black px-4 py-2.5 rounded-xl shadow-xs flex flex-wrap items-center justify-between gap-3 text-xs font-black">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 text-black shrink-0" />
+            <span>
+              Внимание: Вы находитесь в режиме проверки интерфейса от имени сотрудника: {currentUser?.name} ({currentUser?.email})
+            </span>
+          </div>
+          <button
+            onClick={stopImpersonating}
+            className="bg-black text-white hover:bg-neutral-800 px-3 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-xs"
+          >
+            <ArrowLeftCircle className="w-3.5 h-3.5" />
+            <span>Вернуться в профиль Супер Админа</span>
+          </button>
+        </div>
+      )}
+
+      <header className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        {/* Left side title & subtitle */}
+        <div>
+          <h1 className="text-xl md:text-2xl font-black text-neutral-900 tracking-tight">
+            {title}
+          </h1>
+          <p className="text-xs text-neutral-500 font-bold mt-0.5">
+            {subtitle}
+          </p>
+        </div>
 
       {/* Right side actions */}
       <div className="flex flex-wrap items-center gap-3">
@@ -135,5 +159,7 @@ export const Header: React.FC = () => {
         </button>
       </div>
     </header>
+    </div>
   );
 };
+

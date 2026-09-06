@@ -115,4 +115,43 @@ export interface StockItem {
   lastRestocked: string;
 }
 
-export type ActiveTab = 'kanban' | 'orders' | 'clients' | 'employees' | 'accounting' | 'analytics';
+export type ActiveTab = 'kanban' | 'orders' | 'clients' | 'employees' | 'accounting' | 'analytics' | 'superadmin';
+
+export type UserRole = 'super_admin' | 'sales' | 'operator' | 'designer' | 'postpress' | 'accountant' | 'admin';
+
+export interface UserPermissions {
+  kanban: boolean;
+  orders: boolean;
+  clients: boolean;
+  employees: boolean;
+  accounting: boolean;
+  analytics: boolean;
+  canDeleteOrders: boolean;
+  canEditFinances: boolean;
+  canManageStaff: boolean;
+}
+
+export interface UserAccount {
+  id: string;
+  email: string;
+  password: string;
+  name: string;
+  phone?: string;
+  role: UserRole;
+  isSuperAdmin: boolean;
+  isActive: boolean;
+  permissions: UserPermissions;
+  createdAt: string;
+  lastLoginAt?: string;
+  avatarBg?: string;
+  notes?: string;
+}
+
+export interface AuditLogItem {
+  id: string;
+  timestamp: string;
+  actorEmail: string;
+  action: string;
+  details: string;
+  type: 'auth' | 'account' | 'permission' | 'system';
+}
