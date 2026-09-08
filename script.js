@@ -202,8 +202,8 @@ function triggerCatalogDownload() {
   
   const catalogText = `
 UNION PRINT - MAHSULOTLAR KATALOGI 2026
-Manzil: Rudakiy 168, Brilliant city
-Telefon: +998 88 416 99 88
+Manzil: Lohutiy 3, (Brilliant City)
+Telefon: +998 88 416 99 88 | +998 90 284 66 66
 Telegram: @unionprint_uz | Instagram: @unionprint.uz
 
 1. UV DTF Stiker (A4) - 35,000 UZS
