@@ -82,33 +82,22 @@
 
         <div class="cards-grid">
 
-          <!-- Card 1: Telefon 1 -->
-          <a href="tel:+998884169988" class="figma-card" id="card-phone-1">
+          <!-- Card 1: Telefon (Ikkala raqam bitta kartada) -->
+          <div class="figma-card clickable-card" id="card-phone" onclick="openModal('phone-modal')">
             <div class="card-left-icon">
               <img src="../assets/card_icon_1.png?v=3.0" alt="Telefon" class="figma-icon-img">
             </div>
             <div class="card-details">
               <span class="card-title">Telefon</span>
-              <span class="card-value">+998 88 416 99 88</span>
+              <div class="card-phones-list">
+                <a href="tel:+998884169988" class="phone-link" onclick="event.stopPropagation()">+998 88 416 99 88</a>
+                <a href="tel:+998902846666" class="phone-link" onclick="event.stopPropagation()">+998 90 284 66 66</a>
+              </div>
             </div>
             <div class="card-right-action">
               <i data-lucide="chevron-right" class="chevron-arrow"></i>
             </div>
-          </a>
-
-          <!-- Card 2: Telefon 2 -->
-          <a href="tel:+998902846666" class="figma-card" id="card-phone-2">
-            <div class="card-left-icon">
-              <img src="../assets/card_icon_1.png?v=3.0" alt="Telefon" class="figma-icon-img">
-            </div>
-            <div class="card-details">
-              <span class="card-title">Telefon</span>
-              <span class="card-value">+998 90 284 66 66</span>
-            </div>
-            <div class="card-right-action">
-              <i data-lucide="chevron-right" class="chevron-arrow"></i>
-            </div>
-          </a>
+          </div>
 
           <!-- Card 2: Manzil (Pop-up Yandex Map) -->
           <div class="figma-card clickable-card" id="card-address" onclick="openModal('address-modal')">
@@ -332,6 +321,33 @@
       <div class="modal-actions" style="margin-top: 16px;">
         <a href="https://yandex.uz/maps/-/CTX3MJ-Q" target="_blank" rel="noopener" class="btn-primary full-width">
           <i data-lucide="navigation"></i> Marshrutni ko'rsatish (Yandex Maps)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: PHONE NUMBERS MODAL -->
+  <div class="modal-overlay" id="phone-modal" onclick="closeModalOnOverlay(event, 'phone-modal')">
+    <div class="modal-content glass-modal">
+      <button class="modal-close" onclick="closeModal('phone-modal')">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="modal-header">
+        <div class="modal-icon-badge">
+          <i data-lucide="phone"></i>
+        </div>
+        <div>
+          <h2>Telefon raqamlar</h2>
+          <p class="sub-text">Qo'ng'iroq qilish uchun raqamni tanlang</p>
+        </div>
+      </div>
+
+      <div class="modal-actions" style="margin-top: 18px; display: flex; flex-direction: column; gap: 10px;">
+        <a href="tel:+998884169988" class="btn-primary full-width">
+          <i data-lucide="phone-call"></i> +998 88 416 99 88
+        </a>
+        <a href="tel:+998902846666" class="btn-primary full-width">
+          <i data-lucide="phone-call"></i> +998 90 284 66 66
         </a>
       </div>
     </div>

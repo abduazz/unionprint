@@ -243,6 +243,29 @@ body {
   line-height: 1.2;
 }
 
+.card-phones-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 2px;
+}
+
+.phone-link {
+  font-size: 0.94rem;
+  font-weight: 500;
+  color: var(--primary-lime);
+  line-height: 1.25;
+  text-decoration: none;
+  transition: var(--transition-fast);
+  display: inline-block;
+  width: fit-content;
+}
+
+.phone-link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px var(--primary-lime-glow);
+}
+
 .card-subtitle-muted {
   font-size: 0.88rem;
   font-weight: 300;
