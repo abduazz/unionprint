@@ -30,7 +30,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=4.0">
+  <link rel="stylesheet" href="style.css?v=4.2">
 </head>
 <body>
 
@@ -46,7 +46,7 @@
   <header class="site-navbar">
     <div class="site-container nav-container">
       
-      <!-- Brand Logo -->
+      <!-- Brand Logo (Clean emblem without text as requested) -->
       <a href="#hero" class="nav-brand">
         <img src="assets/logo.png?v=3.0" alt="UNION PRINT" class="nav-logo-img">
       </a>
@@ -54,17 +54,25 @@
       <!-- Desktop Navigation Links -->
       <nav>
         <ul class="nav-links">
-          <li><a href="#services" class="nav-link">Xizmatlar</a></li>
-          <li><a href="#calculator" class="nav-link">Kalkulyator</a></li>
-          <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-          <li><a href="#advantages" class="nav-link">Afzalliklar</a></li>
-          <li><a href="#catalog" class="nav-link">Narxlar</a></li>
-          <li><a href="#contacts" class="nav-link">Bog'lanish</a></li>
+          <li><a href="#services" class="nav-link" data-i18n="nav.services">Xizmatlar</a></li>
+          <li><a href="#calculator" class="nav-link" data-i18n="nav.calculator">Kalkulyator</a></li>
+          <li><a href="#portfolio" class="nav-link" data-i18n="nav.portfolio">Portfolio</a></li>
+          <li><a href="#advantages" class="nav-link" data-i18n="nav.advantages">Afzalliklar</a></li>
+          <li><a href="#catalog" class="nav-link" data-i18n="nav.catalog">Narxlar</a></li>
+          <li><a href="#contacts" class="nav-link" data-i18n="nav.contacts">Bog'lanish</a></li>
         </ul>
       </nav>
 
-      <!-- Right Action Area: Live Status + Phone CTA + Mobile Toggle -->
+      <!-- Right Action Area: Lang Switcher + Live Status + Phone CTA + Mobile Toggle -->
       <div class="nav-actions">
+        
+        <!-- Language Switcher (UZ | RU | EN) -->
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="uz" onclick="setLanguage('uz')">UZ</button>
+          <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">RU</button>
+          <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
+
         <!-- Live Real-time Working Hours Badge -->
         <div class="live-status-pill" id="live-status-badge">
           <span class="status-dot"></span>
@@ -73,7 +81,8 @@
 
         <!-- Quick Call Button -->
         <button class="btn-primary btn-sm" onclick="openModal('phone-modal')">
-          <i data-lucide="phone-call" style="width: 16px; height: 16px;"></i> Qo'ng'iroq
+          <i data-lucide="phone-call" style="width: 16px; height: 16px;"></i>
+          <span data-i18n="nav.call_btn">Qo'ng'iroq</span>
         </button>
 
         <!-- Mobile Menu Hamburger Button -->
@@ -87,14 +96,25 @@
 
   <!-- Mobile Drawer Menu -->
   <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    
+    <!-- Mobile Language Switcher -->
+    <div class="mobile-lang-wrap">
+      <span class="mobile-lang-title" data-i18n="nav.choose_language">Tilni tanlang:</span>
+      <div class="lang-switcher" style="align-self: flex-start;">
+        <button class="lang-btn active" data-lang="uz" onclick="setLanguage('uz')">O'zbek</button>
+        <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">Русский</button>
+        <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">English</button>
+      </div>
+    </div>
+
     <ul class="mobile-nav-links">
-      <li><a href="#services" class="mobile-nav-link">Xizmatlarimiz</a></li>
-      <li><a href="#calculator" class="mobile-nav-link">Narx kalkulyatori</a></li>
-      <li><a href="#portfolio" class="mobile-nav-link">Bizning ishlarimiz</a></li>
-      <li><a href="#advantages" class="mobile-nav-link">Afzalliklarimiz</a></li>
-      <li><a href="#catalog" class="mobile-nav-link">Katalog & Narxlar</a></li>
-      <li><a href="#contacts" class="mobile-nav-link">Manzil & Aloqa</a></li>
-      <li><a href="bio/" class="mobile-nav-link" style="color: var(--primary-lime);">Bio Havolalar (Taplink) &rarr;</a></li>
+      <li><a href="#services" class="mobile-nav-link" data-i18n="nav.services">Xizmatlarimiz</a></li>
+      <li><a href="#calculator" class="mobile-nav-link" data-i18n="nav.calculator">Narx kalkulyatori</a></li>
+      <li><a href="#portfolio" class="mobile-nav-link" data-i18n="nav.portfolio">Bizning ishlarimiz</a></li>
+      <li><a href="#advantages" class="mobile-nav-link" data-i18n="nav.advantages">Afzalliklarimiz</a></li>
+      <li><a href="#catalog" class="mobile-nav-link" data-i18n="nav.catalog">Katalog & Narxlar</a></li>
+      <li><a href="#contacts" class="mobile-nav-link" data-i18n="nav.contacts">Manzil & Aloqa</a></li>
+      <li><a href="bio/" class="mobile-nav-link" style="color: var(--primary-lime);" data-i18n="nav.bio_link">Bio Havolalar (Taplink) &rarr;</a></li>
     </ul>
     <div style="display: flex; gap: 10px; margin-top: 10px;">
       <a href="tel:+998884169988" class="btn-primary full-width">
@@ -116,37 +136,40 @@
           
           <div class="hero-badge">
             <span class="status-dot"></span>
-            SAMARQANDNING PROFESSIONAL POLIGRAFIYA MARKAZI
+            <span data-i18n="hero.badge">SAMARQANDNING PROFESSIONAL POLIGRAFIYA MARKAZI</span>
           </div>
 
-          <h1 class="hero-title">
+          <h1 class="hero-title" data-i18n="hero.title">
             Sifatli Bosma Mahsulotlar va <span class="lime-text">Zamonaviy Tashqi Reklama</span>
           </h1>
 
-          <p class="hero-description">
+          <p class="hero-description" data-i18n="hero.description">
             UV DTF innovatsion pechat, keng formatli bardoshli bannerlar, 3D yoritgichli harflar, neon tablichkalar va yuqori darajadagi poligrafiya xizmatlari. Biznesingizni yorqin va esda qolarli qilamiz!
           </p>
 
           <!-- Tagline Pills -->
           <div class="hero-tags-pill">
-            <span>UV DTF</span> <span class="dot">·</span>
-            <span>BANNER</span> <span class="dot">·</span>
-            <span>3D HARFLAR</span> <span class="dot">·</span>
-            <span>NEON REKLAMA</span> <span class="dot">·</span>
-            <span>VIZITKA</span> <span class="dot">·</span>
-            <span>BRENDING</span>
+            <span data-i18n="hero.tag_uv">UV DTF</span> <span class="dot">·</span>
+            <span data-i18n="hero.tag_banner">BANNER</span> <span class="dot">·</span>
+            <span data-i18n="hero.tag_letters">3D HARFLAR</span> <span class="dot">·</span>
+            <span data-i18n="hero.tag_neon">NEON REKLAMA</span> <span class="dot">·</span>
+            <span data-i18n="hero.tag_cards">VIZITKA</span> <span class="dot">·</span>
+            <span data-i18n="hero.tag_branding">BRENDING</span>
           </div>
 
           <!-- CTAs -->
           <div class="hero-cta-group">
             <a href="#calculator" class="btn-primary">
-              <i data-lucide="calculator"></i> Narxni hisoblash
+              <i data-lucide="calculator"></i>
+              <span data-i18n="hero.btn_calc">Narxni hisoblash</span>
             </a>
             <button class="btn-secondary" onclick="openModal('catalog-modal')">
-              <i data-lucide="file-text"></i> Katalog & Narxlar
+              <i data-lucide="file-text"></i>
+              <span data-i18n="hero.btn_catalog">Katalog & Narxlar</span>
             </button>
             <a href="https://t.me/unionprint_uz" target="_blank" rel="noopener" class="btn-secondary">
-              <i data-lucide="send"></i> Telegram
+              <i data-lucide="send"></i>
+              <span data-i18n="hero.btn_tg">Telegram</span>
             </a>
           </div>
 
@@ -154,19 +177,19 @@
           <div class="hero-stats-row">
             <div class="stat-item">
               <span class="stat-num">5+</span>
-              <span class="stat-label">Yillik tajriba</span>
+              <span class="stat-label" data-i18n="hero.stat_experience">Yillik tajriba</span>
             </div>
             <div class="stat-item">
               <span class="stat-num">10 000+</span>
-              <span class="stat-label">Muvaffaqiyatli buyurtma</span>
+              <span class="stat-label" data-i18n="hero.stat_orders">Muvaffaqiyatli buyurtma</span>
             </div>
             <div class="stat-item">
               <span class="stat-num">24-48</span>
-              <span class="stat-label">Soatda tayyorlash</span>
+              <span class="stat-label" data-i18n="hero.stat_speed">Soatda tayyorlash</span>
             </div>
             <div class="stat-item">
               <span class="stat-num">100%</span>
-              <span class="stat-label">Sifat kafolati</span>
+              <span class="stat-label" data-i18n="hero.stat_guarantee">Sifat kafolati</span>
             </div>
           </div>
 
@@ -178,13 +201,13 @@
             <div class="hero-showcase-grid">
               
               <!-- Tile 1: UV DTF -->
-              <div class="showcase-tile" onclick="openLightbox('assets/mockup_uv_dtf.png', 'UV DTF Innovatsion Pechat', 'UV DTF')">
+              <div class="showcase-tile" onclick="openLightbox('assets/mockup_uv_dtf.png', 'UV DTF Pechat', 'UV DTF')">
                 <div class="showcase-img-box">
                   <img src="assets/mockup_uv_dtf.png" alt="UV DTF Pechat Mockup">
                 </div>
                 <div>
-                  <span class="showcase-tile-badge">INNOVATSIYA</span>
-                  <h4 class="showcase-tile-title">UV DTF Pechat</h4>
+                  <span class="showcase-tile-badge" data-i18n="s1.badge">TOP XIZMAT</span>
+                  <h4 class="showcase-tile-title" data-i18n="s1.title">UV DTF Pechat</h4>
                 </div>
               </div>
 
@@ -194,30 +217,30 @@
                   <img src="assets/mockup_3d_letters.png" alt="3D Harflar Mockup">
                 </div>
                 <div>
-                  <span class="showcase-tile-badge">TASHQI REKLAMA</span>
-                  <h4 class="showcase-tile-title">3D Harflar</h4>
+                  <span class="showcase-tile-badge" data-i18n="s3.badge">PREMIUM</span>
+                  <h4 class="showcase-tile-title" data-i18n="s3.title">3D Harflar</h4>
                 </div>
               </div>
 
               <!-- Tile 3: Neon -->
-              <div class="showcase-tile" onclick="openLightbox('assets/mockup_neon.png', 'Neon Signboard Reklama', 'Neon')">
+              <div class="showcase-tile" onclick="openLightbox('assets/mockup_neon.png', 'Neon Reklama', 'Neon')">
                 <div class="showcase-img-box">
                   <img src="assets/mockup_neon.png" alt="Neon Reklama Mockup">
                 </div>
                 <div>
-                  <span class="showcase-tile-badge">TRENDY</span>
-                  <h4 class="showcase-tile-title">Neon Signboards</h4>
+                  <span class="showcase-tile-badge" data-i18n="s4.badge">TREND 2026</span>
+                  <h4 class="showcase-tile-title" data-i18n="s4.title">Neon Signboards</h4>
                 </div>
               </div>
 
               <!-- Tile 4: Polygraphy -->
-              <div class="showcase-tile" onclick="openLightbox('assets/mockup_cards.png', 'Vizitkalar va Poligrafiya', 'Poligrafiya')">
+              <div class="showcase-tile" onclick="openLightbox('assets/mockup_cards.png', 'Vizitka & Buklet', 'Poligrafiya')">
                 <div class="showcase-img-box">
                   <img src="assets/mockup_cards.png" alt="Vizitka va Poligrafiya Mockup">
                 </div>
                 <div>
-                  <span class="showcase-tile-badge">KORPORATIV</span>
-                  <h4 class="showcase-tile-title">Vizitka & Buklet</h4>
+                  <span class="showcase-tile-badge" data-i18n="s5.badge">OPERATIV</span>
+                  <h4 class="showcase-tile-title" data-i18n="s5.title">Vizitka & Buklet</h4>
                 </div>
               </div>
 
@@ -226,7 +249,7 @@
             <!-- Floating Trust Badge -->
             <div class="hero-floating-badge">
               <i data-lucide="shield-check" style="color: var(--primary-lime); width: 22px; height: 22px;"></i>
-              <span>Lohutiy 3, Brilliant City</span>
+              <span data-i18n="hero.floating_badge">Lohutiy 3, Brilliant City</span>
             </div>
 
           </div>
@@ -246,12 +269,12 @@
       <div class="section-header">
         <div class="section-tag">
           <span class="section-tag-dot"></span>
-          XIZMATLARIMIZ
+          <span data-i18n="services.tag">XIZMATLARIMIZ</span>
         </div>
-        <h2 class="section-title">
+        <h2 class="section-title" data-i18n="services.title">
           Biznesingiz Uchun <span class="lime-highlight">To'liq Bosma Yechimlar</span>
         </h2>
-        <p class="section-subtitle">
+        <p class="section-subtitle" data-i18n="services.subtitle">
           Kichik vizitkadan tortib yirik fasad konstruksiyalarigacha — barchasi bir joyda, zamonaviy texnologiyalar yordamida tez va sifatli tayyorlanadi.
         </p>
       </div>
@@ -262,25 +285,24 @@
         <div class="service-card">
           <div class="service-card-top">
             <img src="assets/mockup_uv_dtf.png" alt="UV DTF Pechat" class="service-card-img">
-            <span class="service-badge">TOP XIZMAT</span>
+            <span class="service-badge" data-i18n="s1.badge">TOP XIZMAT</span>
           </div>
           <div class="service-card-body">
-            <h3 class="service-card-title">UV DTF Pechat</h3>
-            <p class="service-card-desc">
+            <h3 class="service-card-title" data-i18n="s1.title">UV DTF Pechat</h3>
+            <p class="service-card-desc" data-i18n="s1.desc">
               Har qanday qattiq va silliq yuzalarga (shisha, metall, yog'och, charm, plastmassa, termo-krujka, telefon chexollari) o'chmaydigan 3D relyefli yorqin stikerlar.
             </p>
             <ul class="service-features-list">
-              <li><i data-lucide="check"></i> Suvga va tirnalishga 100% chidamli</li>
-              <li><i data-lucide="check"></i> A4 va A3 formatlarda chop etish</li>
-              <li><i data-lucide="check"></i> Lak qoplamali chiroyli 3D hajm</li>
+              <li><i data-lucide="check"></i> <span data-i18n="s1.f1">Suvga va tirnalishga 100% chidamli</span></li>
+              <li><i data-lucide="check"></i> <span data-i18n="s1.f2">A4 va A3 formatlarda chop etish</span></li>
+              <li><i data-lucide="check"></i> <span data-i18n="s1.f3">Lak qoplamali chiroyli 3D hajm</span></li>
             </ul>
             <div class="service-card-footer">
               <div class="service-price-wrap">
-                <span class="price-label">Narxi</span>
-                <span class="price-val">25,000 UZS dan</span>
+                <span class="price-val" data-i18n="s1.price">25,000 UZS dan</span>
               </div>
               <button class="btn-primary btn-sm" onclick="openOrderModal('UV DTF Pechat')">
-                Buyurtma <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                <span data-i18n="services.btn_order">Buyurtma</span> <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
               </button>
             </div>
           </div>
@@ -290,25 +312,24 @@
         <div class="service-card">
           <div class="service-card-top">
             <img src="assets/bg.png" alt="Keng Formatli Banner" class="service-card-img">
-            <span class="service-badge">TASHQI REKLAMA</span>
+            <span class="service-badge" data-i18n="s2.badge">TASHQI REKLAMA</span>
           </div>
           <div class="service-card-body">
-            <h3 class="service-card-title">Keng Formatli Banner & Orakal</h3>
-            <p class="service-card-desc">
+            <h3 class="service-card-title" data-i18n="s2.title">Keng Formatli Banner & Orakal</h3>
+            <p class="service-card-desc" data-i18n="s2.desc">
               Fasad reklamasi, katta o'lchamli billbordlar, do'kon peshtoqlari, press-wall, fotobannerlar va oyna uchun o'ziyopishqoq orakal stikerlar bosmasi.
             </p>
             <ul class="service-features-list">
-              <li><i data-lucide="check"></i> Quyosh nuri va yomg'irga chidamli bo'yoq</li>
-              <li><i data-lucide="check"></i> 3.2 metrgacha choksiz keng bosma</li>
-              <li><i data-lucide="check"></i> Lyubers va chetlarini yopishtirish</li>
+              <li><i data-lucide="check"></i> <span data-i18n="s2.f1">Quyosh nuri va yomg'irga chidamli bo'yoq</span></li>
+              <li><i data-lucide="check"></i> <span data-i18n="s2.f2">3.2 metrgacha choksiz keng bosma</span></li>
+              <li><i data-lucide="check"></i> <span data-i18n="s2.f3">Lyubers va chetlarini yopishtirish</span></li>
             </ul>
             <div class="service-card-footer">
               <div class="service-price-wrap">
-                <span class="price-label">Narxi</span>
-                <span class="price-val">35,000 UZS / kv.m</span>
+                <span class="price-val" data-i18n="s2.price">35,000 UZS / kv.m</span>
               </div>
               <button class="btn-primary btn-sm" onclick="openOrderModal('Banner Pechat')">
-                Buyurtma <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                <span data-i18n="services.btn_order">Buyurtma</span> <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
               </button>
             </div>
           </div>
@@ -318,25 +339,24 @@
         <div class="service-card">
           <div class="service-card-top">
             <img src="assets/mockup_3d_letters.png" alt="3D Yoritgichli Harflar" class="service-card-img">
-            <span class="service-badge">PREMIUM</span>
+            <span class="service-badge" data-i18n="s3.badge">PREMIUM</span>
           </div>
           <div class="service-card-body">
-            <h3 class="service-card-title">3D Yoritgichli Harflar</h3>
-            <p class="service-card-desc">
+            <h3 class="service-card-title" data-i18n="s3.title">3D Yoritgichli Harflar</h3>
+            <p class="service-card-desc" data-i18n="s3.desc">
               Do'konlar, ofislar, dorixonalar va restoranlar uchun zamonaviy hajmli harflar. Yuqori sifatli akril, metall profil va yorqin LED modullar.
             </p>
             <ul class="service-features-list">
-              <li><i data-lucide="check"></i> Kechasi ajoyib ko'rinuvchi yorqin LED</li>
-              <li><i data-lucide="check"></i> Elektr energiyasini tejovchi 12V tizim</li>
-              <li><i data-lucide="check"></i> Professional montaj va o'rnatish</li>
+              <li><i data-lucide="check"></i> <span data-i18n="s3.f1">Kechasi ajoyib ko'rinuvchi yorqin LED</span></li>
+              <li><i data-lucide="check"></i> <span data-i18n="s3.f2">Elektr energiyasini tejovchi 12V tizim</span></li>
+              <li><i data-lucide="check"></i> <span data-i18n="s3.f3">Professional montaj va o'rnatish</span></li>
             </ul>
             <div class="service-card-footer">
               <div class="service-price-wrap">
-                <span class="price-label">Narxi</span>
-                <span class="price-val">12,000 UZS / sm</span>
+                <span class="price-val" data-i18n="s3.price">12,000 UZS / sm</span>
               </div>
               <button class="btn-primary btn-sm" onclick="openOrderModal('3D Yoritgichli Harflar')">
-                Buyurtma <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                <span data-i18n="services.btn_order">Buyurtma</span> <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
               </button>
             </div>
           </div>
@@ -346,25 +366,24 @@
         <div class="service-card">
           <div class="service-card-top">
             <img src="assets/mockup_neon.png" alt="Neon Reklama" class="service-card-img">
-            <span class="service-badge">TREND 2026</span>
+            <span class="service-badge" data-i18n="s4.badge">TREND 2026</span>
           </div>
           <div class="service-card-body">
-            <h3 class="service-card-title">Neon Reklama & Signboards</h3>
-            <p class="service-card-desc">
+            <h3 class="service-card-title" data-i18n="s4.title">Neon Reklama & Signboards</h3>
+            <p class="service-card-desc" data-i18n="s4.desc">
               Moslashuvchan (flex) silikon neon yordamida individual yozuvlar, logotiplar va suratlar. Kafe, fotosessiya, studiya va xona interyeri uchun eng yaxshi bezak.
             </p>
             <ul class="service-features-list">
-              <li><i data-lucide="check"></i> Sinmaydigan xavfsiz moslashuvchan neon</li>
-              <li><i data-lucide="check"></i> Shaffof akril asos va pult bilan boshqaruv</li>
-              <li><i data-lucide="check"></i> 10+ xil yorqin ranglar palitrasi</li>
+              <li><i data-lucide="check"></i> <span data-i18n="s4.f1">Sinmaydigan xavfsiz moslashuvchan neon</span></li>
+              <li><i data-lucide="check"></i> <span data-i18n="s4.f2">Shaffof akril asos va pult bilan boshqaruv</span></li>
+              <li><i data-lucide="check"></i> <span data-i18n="s4.f3">10+ xil yorqin ranglar palitrasi</span></li>
             </ul>
             <div class="service-card-footer">
               <div class="service-price-wrap">
-                <span class="price-label">Narxi</span>
-                <span class="price-val">350,000 UZS dan</span>
+                <span class="price-val" data-i18n="s4.price">350,000 UZS dan</span>
               </div>
               <button class="btn-primary btn-sm" onclick="openOrderModal('Neon Reklama')">
-                Buyurtma <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                <span data-i18n="services.btn_order">Buyurtma</span> <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
               </button>
             </div>
           </div>
@@ -374,25 +393,24 @@
         <div class="service-card">
           <div class="service-card-top">
             <img src="assets/mockup_cards.png" alt="Vizitka va Poligrafiya" class="service-card-img">
-            <span class="service-badge">OPERATIV</span>
+            <span class="service-badge" data-i18n="s5.badge">OPERATIV</span>
           </div>
           <div class="service-card-body">
-            <h3 class="service-card-title">Vizitka, Flayer & Bukletlar</h3>
-            <p class="service-card-desc">
+            <h3 class="service-card-title" data-i18n="s5.title">Vizitka, Flayer & Bukletlar</h3>
+            <p class="service-card-desc" data-i18n="s5.desc">
               Kompaniyangiz nufuzini oshiruvchi ikki tomonlama sifatli vizitkalar, promo-flayerlar, taomnomalar (menyu), korporativ bloknot va etiketkalar.
             </p>
             <ul class="service-features-list">
-              <li><i data-lucide="check"></i> 300g qalin qog'oz, mat/глянцевый laminatsiya</li>
-              <li><i data-lucide="check"></i> Raqamli (tezkor) va Ofset (katta tiraj)</li>
-              <li><i data-lucide="check"></i> 100 donadan boshlab buyurtma</li>
+              <li><i data-lucide="check"></i> <span data-i18n="s5.f1">300g qalin qog'oz, mat/глянцевый laminatsiya</span></li>
+              <li><i data-lucide="check"></i> <span data-i18n="s5.f2">Raqamli (tezkor) va Ofset (katta tiraj)</span></li>
+              <li><i data-lucide="check"></i> <span data-i18n="s5.f3">100 donadan boshlab buyurtma</span></li>
             </ul>
             <div class="service-card-footer">
               <div class="service-price-wrap">
-                <span class="price-label">Narxi</span>
-                <span class="price-val">60,000 UZS / 100 dona</span>
+                <span class="price-val" data-i18n="s5.price">60,000 UZS / 100 dona</span>
               </div>
               <button class="btn-primary btn-sm" onclick="openOrderModal('Vizitka va Poligrafiya')">
-                Buyurtma <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                <span data-i18n="services.btn_order">Buyurtma</span> <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
               </button>
             </div>
           </div>
@@ -402,25 +420,24 @@
         <div class="service-card">
           <div class="service-card-top" style="display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(156,226,20,0.15) 0%, #080d07 100%);">
             <img src="assets/logo.png" alt="Grafik Dizayn" style="max-width: 180px; filter: drop-shadow(0 0 14px rgba(156,226,20,0.4));">
-            <span class="service-badge">KREATIV</span>
+            <span class="service-badge" data-i18n="s6.badge">KREATIV</span>
           </div>
           <div class="service-card-body">
-            <h3 class="service-card-title">Grafik Dizayn & Brending</h3>
-            <p class="service-card-desc">
+            <h3 class="service-card-title" data-i18n="s6.title">Grafik Dizayn & Brending</h3>
+            <p class="service-card-desc" data-i18n="s6.desc">
               Logotiplar yaratish, brend identifikatsiyasi, ijtimoiy tarmoqlar uchun kreativalar va chop etishga tayyor maketlar (Pre-press) tayyorlash.
             </p>
             <ul class="service-features-list">
-              <li><i data-lucide="check"></i> Professional tajribali dizaynerlar</li>
-              <li><i data-lucide="check"></i> Bosmaxona talablariga 100% mos formatlar</li>
-              <li><i data-lucide="check"></i> Vektorli fayllar (AI, CDR, PDF)</li>
+              <li><i data-lucide="check"></i> <span data-i18n="s6.f1">Professional tajribali dizaynerlar</span></li>
+              <li><i data-lucide="check"></i> <span data-i18n="s6.f2">Bosmaxona talablariga 100% mos formatlar</span></li>
+              <li><i data-lucide="check"></i> <span data-i18n="s6.f3">Vektorli fayllar (AI, CDR, PDF)</span></li>
             </ul>
             <div class="service-card-footer">
               <div class="service-price-wrap">
-                <span class="price-label">Narxi</span>
-                <span class="price-val">200,000 UZS dan</span>
+                <span class="price-val" data-i18n="s6.price">200,000 UZS dan</span>
               </div>
               <button class="btn-primary btn-sm" onclick="openOrderModal('Grafik Dizayn')">
-                Buyurtma <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                <span data-i18n="services.btn_order">Buyurtma</span> <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
               </button>
             </div>
           </div>
@@ -440,12 +457,12 @@
       <div class="section-header">
         <div class="section-tag">
           <span class="section-tag-dot"></span>
-          ONLAYN HISOB-KITOBLAR
+          <span data-i18n="calc.tag">ONLAYN HISOB-KITOBLAR</span>
         </div>
-        <h2 class="section-title">
+        <h2 class="section-title" data-i18n="calc.title">
           Narxni <span class="lime-highlight">Bir Zumda Hisoblang</span>
         </h2>
-        <p class="section-subtitle">
+        <p class="section-subtitle" data-i18n="calc.subtitle">
           Kerakli xizmat turini va miqdorini tanlang, narxni avtomatik hisoblang hamda to'g'ridan-to'g'ri Telegram orqali yuboring!
         </p>
       </div>
@@ -458,40 +475,29 @@
             
             <div class="form-group">
               <label class="form-label" for="calc-service">
-                <span>Xizmat turini tanlang</span>
-                <span class="form-label-hint">Asosiy ro'yxat</span>
+                <span data-i18n="calc.service_label">Xizmat turini tanlang</span>
+                <span class="form-label-hint" data-i18n="calc.service_hint">Asosiy ro'yxat</span>
               </label>
-              <select id="calc-service" class="form-select">
-                <option value="uv_dtf_a4" selected>UV DTF Stiker — A4 format (21x29 cm) — 25,000 UZS</option>
-                <option value="uv_dtf_a3">UV DTF Stiker — A3 format (29x42 cm) — 45,000 UZS</option>
-                <option value="banner_std">Katta formatli Banner — 1 kv.m — 35,000 UZS</option>
-                <option value="banner_prem">Yuqori sifatli Banner — 1 kv.m — 50,000 UZS</option>
-                <option value="orakal">Orakal (Samokleyka) — 1 kv.m — 40,000 UZS</option>
-                <option value="letters_3d">3D Yoritgichli Harflar — 1 sm balandlik — 12,000 UZS</option>
-                <option value="vizitka_100">Vizitkalar (Ikki tomonlama) — 100 dona — 60,000 UZS</option>
-                <option value="vizitka_1000">Vizitkalar (Ofset) — 1000 dona — 280,000 UZS</option>
-                <option value="flayer_500">Flayerlar A5 — 500 dona — 240,000 UZS</option>
-                <option value="neon_custom">Neon Signboard (Boshlang'ich) — 350,000 UZS</option>
-              </select>
+              <select id="calc-service" class="form-select"></select>
             </div>
 
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label" for="calc-qty">Miqdor / Hajm</label>
+                <label class="form-label" for="calc-qty" data-i18n="calc.qty_label">Miqdor / Hajm</label>
                 <input type="number" id="calc-qty" class="form-input" value="1" min="1" max="10000" step="1">
               </div>
 
               <div class="form-group" style="justify-content: flex-end;">
                 <label class="checkbox-wrap" style="padding-bottom: 12px;">
                   <input type="checkbox" id="calc-design">
-                  <span>Dizayn maket tayyorlash (+30,000 UZS)</span>
+                  <span data-i18n="calc.design_checkbox">Dizayn maket tayyorlash (+30,000 UZS)</span>
                 </label>
               </div>
             </div>
 
             <div style="background: rgba(156,226,20,0.06); border: 1px dashed rgba(156,226,20,0.25); border-radius: var(--radius-md); padding: 14px 18px; font-size: 0.85rem; color: var(--text-muted);">
               <i data-lucide="info" style="color: var(--primary-lime); width: 16px; height: 16px; vertical-align: middle; margin-right: 6px;"></i>
-              <strong>Katta hajmda chegirmalar:</strong> Katta tirajli buyurtmalar va korporativ mijozlar uchun maxsus individual narxlar amal qiladi.
+              <span data-i18n="calc.discount_note"><strong>Katta hajmda chegirmalar:</strong> Katta tirajli buyurtmalar va korporativ mijozlar uchun maxsus individual narxlar amal qiladi.</span>
             </div>
 
           </div>
@@ -500,20 +506,20 @@
           <div class="calc-result-box">
             <div>
               <div class="calc-result-header">
-                <h4 class="calc-result-title">Buyurtma xulosasi</h4>
+                <h4 class="calc-result-title" data-i18n="calc.summary_title">Buyurtma xulosasi</h4>
               </div>
 
               <ul class="calc-breakdown-list">
                 <li class="calc-breakdown-item">
-                  <span>Tanlangan xizmat:</span>
+                  <span data-i18n="calc.summary_service">Tanlangan xizmat:</span>
                   <span class="calc-breakdown-val" id="calc-breakdown-service">UV DTF Stiker (A4)</span>
                 </li>
                 <li class="calc-breakdown-item">
-                  <span>Miqdor / O'lcham:</span>
-                  <span class="calc-breakdown-val" id="calc-breakdown-qty">1 dona/to'plam</span>
+                  <span data-i18n="calc.summary_qty">Miqdor / O'lcham:</span>
+                  <span class="calc-breakdown-val" id="calc-breakdown-qty">1 dona</span>
                 </li>
                 <li class="calc-breakdown-item">
-                  <span>Birlik narxi:</span>
+                  <span data-i18n="calc.summary_unit">Birlik narxi:</span>
                   <span class="calc-breakdown-val" id="calc-breakdown-unit">25,000 UZS</span>
                 </li>
               </ul>
@@ -521,16 +527,16 @@
 
             <div>
               <div class="calc-total-wrap">
-                <div class="calc-total-label">Taxminiy Jami Qiymat</div>
+                <div class="calc-total-label" data-i18n="calc.total_label">Taxminiy Jami Qiymat</div>
                 <div class="calc-total-amount" id="calc-total-amount">25,000 UZS</div>
               </div>
 
               <div style="display: flex; flex-direction: column; gap: 10px;">
                 <a id="calc-order-tg-btn" href="https://t.me/unionprint_uz" target="_blank" rel="noopener" class="btn-primary full-width">
-                  <i data-lucide="send"></i> Telegram orqali buyurtma berish
+                  <i data-lucide="send"></i> <span data-i18n="calc.btn_order_tg">Telegram orqali buyurtma berish</span>
                 </a>
                 <button class="btn-secondary full-width" onclick="openModal('phone-modal')">
-                  <i data-lucide="phone"></i> Maslahatchiga qo'ng'iroq qilish
+                  <i data-lucide="phone"></i> <span data-i18n="calc.btn_consult">Maslahatchiga qo'ng'iroq qilish</span>
                 </button>
               </div>
             </div>
@@ -552,34 +558,34 @@
       <div class="section-header">
         <div class="section-tag">
           <span class="section-tag-dot"></span>
-          BIZNING ISHLARIMIZ
+          <span data-i18n="portfolio.tag">BIZNING ISHLARIMIZ</span>
         </div>
-        <h2 class="section-title">
+        <h2 class="section-title" data-i18n="portfolio.title">
           Haqiqiy Natijalar va <span class="lime-highlight">Tayyor Namunalar</span>
         </h2>
-        <p class="section-subtitle">
+        <p class="section-subtitle" data-i18n="portfolio.subtitle">
           Biz mijozlarimizga taqdim etgan bosma va reklama mahsulotlarining sifatini o'z ko'zingiz bilan ko'ring.
         </p>
       </div>
 
       <!-- Filter Tabs -->
       <div class="portfolio-tabs">
-        <button class="portfolio-tab-btn active" data-filter="all">Barchasi</button>
-        <button class="portfolio-tab-btn" data-filter="uv_dtf">UV DTF Pechat</button>
-        <button class="portfolio-tab-btn" data-filter="letters">3D Harflar</button>
-        <button class="portfolio-tab-btn" data-filter="neon">Neon Reklama</button>
-        <button class="portfolio-tab-btn" data-filter="polygraphy">Poligrafiya</button>
+        <button class="portfolio-tab-btn active" data-filter="all" data-i18n="portfolio.tab_all">Barchasi</button>
+        <button class="portfolio-tab-btn" data-filter="uv_dtf" data-i18n="portfolio.tab_uv">UV DTF Pechat</button>
+        <button class="portfolio-tab-btn" data-filter="letters" data-i18n="portfolio.tab_letters">3D Harflar</button>
+        <button class="portfolio-tab-btn" data-filter="neon" data-i18n="portfolio.tab_neon">Neon Reklama</button>
+        <button class="portfolio-tab-btn" data-filter="polygraphy" data-i18n="portfolio.tab_poly">Poligrafiya</button>
       </div>
 
       <!-- Portfolio Grid -->
       <div class="portfolio-grid">
         
         <!-- Item 1: UV DTF -->
-        <div class="portfolio-card" data-category="uv_dtf" onclick="openLightbox('assets/mockup_uv_dtf.png', 'Termo-krujka va Shisha UV DTF Stikerlari', 'UV DTF Pechat')">
+        <div class="portfolio-card" data-category="uv_dtf" onclick="openLightbox('assets/mockup_uv_dtf.png', 'Termo-krujka va Shisha UV DTF Stikerlari', 'UV DTF')">
           <img src="assets/mockup_uv_dtf.png" alt="UV DTF Pechat namunasi" class="portfolio-card-img">
           <div class="portfolio-overlay">
-            <span class="portfolio-card-category">UV DTF Pechat</span>
-            <h4 class="portfolio-card-name">Termo-krujka va Idishlar</h4>
+            <span class="portfolio-card-category" data-i18n="portfolio.tab_uv">UV DTF Pechat</span>
+            <h4 class="portfolio-card-name" data-i18n="portfolio.p1">Termo-krujka va Idishlar</h4>
           </div>
           <div class="portfolio-zoom-icon"><i data-lucide="maximize-2"></i></div>
         </div>
@@ -588,8 +594,8 @@
         <div class="portfolio-card" data-category="letters" onclick="openLightbox('assets/mockup_3d_letters.png', 'Akril Yoritgichli 3D Fasad Harflari', '3D Harflar')">
           <img src="assets/mockup_3d_letters.png" alt="3D Yoritgichli Harflar" class="portfolio-card-img">
           <div class="portfolio-overlay">
-            <span class="portfolio-card-category">3D Harflar</span>
-            <h4 class="portfolio-card-name">Do'kon Fasad Signboard</h4>
+            <span class="portfolio-card-category" data-i18n="portfolio.tab_letters">3D Harflar</span>
+            <h4 class="portfolio-card-name" data-i18n="portfolio.p2">Do'kon Fasad Signboard</h4>
           </div>
           <div class="portfolio-zoom-icon"><i data-lucide="maximize-2"></i></div>
         </div>
@@ -598,8 +604,8 @@
         <div class="portfolio-card" data-category="neon" onclick="openLightbox('assets/mockup_neon.png', 'Egiluvchan Moslashuvchan Neon Signboard', 'Neon Reklama')">
           <img src="assets/mockup_neon.png" alt="Neon Reklama namunasi" class="portfolio-card-img">
           <div class="portfolio-overlay">
-            <span class="portfolio-card-category">Neon Reklama</span>
-            <h4 class="portfolio-card-name">Interyer uchun Neon Logotip</h4>
+            <span class="portfolio-card-category" data-i18n="portfolio.tab_neon">Neon Reklama</span>
+            <h4 class="portfolio-card-name" data-i18n="portfolio.p3">Interyer uchun Neon Logotip</h4>
           </div>
           <div class="portfolio-zoom-icon"><i data-lucide="maximize-2"></i></div>
         </div>
@@ -608,8 +614,8 @@
         <div class="portfolio-card" data-category="polygraphy" onclick="openLightbox('assets/mockup_cards.png', 'Premium Mat Laminatsiyali Vizitkalar', 'Poligrafiya')">
           <img src="assets/mockup_cards.png" alt="Vizitka Poligrafiya" class="portfolio-card-img">
           <div class="portfolio-overlay">
-            <span class="portfolio-card-category">Poligrafiya</span>
-            <h4 class="portfolio-card-name">Korporativ Vizitkalar</h4>
+            <span class="portfolio-card-category" data-i18n="portfolio.tab_poly">Poligrafiya</span>
+            <h4 class="portfolio-card-name" data-i18n="portfolio.p4">Korporativ Vizitkalar</h4>
           </div>
           <div class="portfolio-zoom-icon"><i data-lucide="maximize-2"></i></div>
         </div>
@@ -618,18 +624,18 @@
         <div class="portfolio-card" data-category="letters" onclick="openLightbox('assets/mockup_3d_letters.png', 'Tungi Yoruglik Taratuvchi LED Konstruksiya', '3D Harflar')">
           <img src="assets/mockup_3d_letters.png" alt="3D Harflar Kechasi" class="portfolio-card-img">
           <div class="portfolio-overlay">
-            <span class="portfolio-card-category">3D Harflar</span>
-            <h4 class="portfolio-card-name">Tungi LED Yoritish</h4>
+            <span class="portfolio-card-category" data-i18n="portfolio.tab_letters">3D Harflar</span>
+            <h4 class="portfolio-card-name" data-i18n="portfolio.p5">Tungi LED Yoritish</h4>
           </div>
           <div class="portfolio-zoom-icon"><i data-lucide="maximize-2"></i></div>
         </div>
 
         <!-- Item 6: UV DTF Metal -->
-        <div class="portfolio-card" data-category="uv_dtf" onclick="openLightbox('assets/mockup_uv_dtf.png', 'Metall va Plastmassa Chexollar uchun UV DTF', 'UV DTF Pechat')">
+        <div class="portfolio-card" data-category="uv_dtf" onclick="openLightbox('assets/mockup_uv_dtf.png', 'Metall va Plastmassa Chexollar uchun UV DTF', 'UV DTF')">
           <img src="assets/mockup_uv_dtf.png" alt="UV DTF metall" class="portfolio-card-img">
           <div class="portfolio-overlay">
-            <span class="portfolio-card-category">UV DTF Pechat</span>
-            <h4 class="portfolio-card-name">Metall Yuzaga Brendlash</h4>
+            <span class="portfolio-card-category" data-i18n="portfolio.tab_uv">UV DTF Pechat</span>
+            <h4 class="portfolio-card-name" data-i18n="portfolio.p6">Metall Yuzaga Brendlash</h4>
           </div>
           <div class="portfolio-zoom-icon"><i data-lucide="maximize-2"></i></div>
         </div>
@@ -638,8 +644,8 @@
         <div class="portfolio-card" data-category="neon" onclick="openLightbox('assets/mockup_neon.png', 'Restoran va Kafe uchun Neon Yozuv', 'Neon Reklama')">
           <img src="assets/mockup_neon.png" alt="Neon Kafe" class="portfolio-card-img">
           <div class="portfolio-overlay">
-            <span class="portfolio-card-category">Neon Reklama</span>
-            <h4 class="portfolio-card-name">Kafe & Bar Bezaghi</h4>
+            <span class="portfolio-card-category" data-i18n="portfolio.tab_neon">Neon Reklama</span>
+            <h4 class="portfolio-card-name" data-i18n="portfolio.p7">Kafe & Bar Bezaghi</h4>
           </div>
           <div class="portfolio-zoom-icon"><i data-lucide="maximize-2"></i></div>
         </div>
@@ -648,8 +654,8 @@
         <div class="portfolio-card" data-category="polygraphy" onclick="openLightbox('assets/mockup_cards.png', 'Flayerlar, Bukletlar va Menyu To‘plami', 'Poligrafiya')">
           <img src="assets/mockup_cards.png" alt="Flayerlar" class="portfolio-card-img">
           <div class="portfolio-overlay">
-            <span class="portfolio-card-category">Poligrafiya</span>
-            <h4 class="portfolio-card-name">Flayer va Menyu Bosmasi</h4>
+            <span class="portfolio-card-category" data-i18n="portfolio.tab_poly">Poligrafiya</span>
+            <h4 class="portfolio-card-name" data-i18n="portfolio.p8">Flayer va Menyu Bosmasi</h4>
           </div>
           <div class="portfolio-zoom-icon"><i data-lucide="maximize-2"></i></div>
         </div>
@@ -668,12 +674,12 @@
       <div class="section-header">
         <div class="section-tag">
           <span class="section-tag-dot"></span>
-          BIZNING AFZALLIKLARIMIZ
+          <span data-i18n="adv.tag">BIZNING AFZALLIKLARIMIZ</span>
         </div>
-        <h2 class="section-title">
+        <h2 class="section-title" data-i18n="adv.title">
           Nega Aynan <span class="lime-highlight">UNION PRINT?</span>
         </h2>
-        <p class="section-subtitle">
+        <p class="section-subtitle" data-i18n="adv.subtitle">
           Samarqandda yuzlab korxonalar va yakka tartibdagi tadbirkorlar bizni tanlashining asosiy sabablari.
         </p>
       </div>
@@ -684,8 +690,8 @@
           <div class="advantage-icon-box">
             <i data-lucide="cpu" style="width: 26px; height: 26px;"></i>
           </div>
-          <h3 class="advantage-title">Zamonaviy Uskunalar</h3>
-          <p class="advantage-desc">
+          <h3 class="advantage-title" data-i18n="adv.a1_title">Zamonaviy Uskunalar</h3>
+          <p class="advantage-desc" data-i18n="adv.a1_desc">
             Eng so'nggi avlod yapon va Yevropa bosma uskunalari yordamida har bir piksel aniqligi va ranglar yorqinligi ta'minlanadi.
           </p>
         </div>
@@ -694,8 +700,8 @@
           <div class="advantage-icon-box">
             <i data-lucide="zap" style="width: 26px; height: 26px;"></i>
           </div>
-          <h3 class="advantage-title">Tezkor Ishlab Chiqarish</h3>
-          <p class="advantage-desc">
+          <h3 class="advantage-title" data-i18n="adv.a2_title">Tezkor Ishlab Chiqarish</h3>
+          <p class="advantage-desc" data-i18n="adv.a2_desc">
             Shoshilinch buyurtmalar 24 soat ichida tayyorlanadi. Biz muddatlarga va mijoz vaqtiga qat'iy hurmat bilan yondashamiz.
           </p>
         </div>
@@ -704,8 +710,8 @@
           <div class="advantage-icon-box">
             <i data-lucide="tag" style="width: 26px; height: 26px;"></i>
           </div>
-          <h3 class="advantage-title">To'g'ridan-to'g'ri Narxlar</h3>
-          <p class="advantage-desc">
+          <h3 class="advantage-title" data-i18n="adv.a3_title">To'g'ridan-to'g'ri Narxlar</h3>
+          <p class="advantage-desc" data-i18n="adv.a3_desc">
             Hech qanday vositachilarsiz, o'z sex va uskunalarimizda tayyorlaymiz. Shaffof narxlar va hajmga qarab chegirmalar taqdim etiladi.
           </p>
         </div>
@@ -714,8 +720,8 @@
           <div class="advantage-icon-box">
             <i data-lucide="map-pin" style="width: 26px; height: 26px;"></i>
           </div>
-          <h3 class="advantage-title">Qulay Joylashuv</h3>
-          <p class="advantage-desc">
+          <h3 class="advantage-title" data-i18n="adv.a4_title">Qulay Joylashuv</h3>
+          <p class="advantage-desc" data-i18n="adv.a4_desc">
             Samarqand markazida: Lohutiy ko'chasi 3, Brilliant City binosida. Qulay avtoturargoh va buyurtmalarni oson olib ketish imkoni.
           </p>
         </div>
@@ -734,12 +740,12 @@
       <div class="section-header">
         <div class="section-tag">
           <span class="section-tag-dot"></span>
-          RASMIY PRICELIST
+          <span data-i18n="catalog.tag">RASMIY PRICELIST</span>
         </div>
-        <h2 class="section-title">
+        <h2 class="section-title" data-i18n="catalog.title">
           Katalog va <span class="lime-highlight">Xizmatlar Narxlari</span>
         </h2>
-        <p class="section-subtitle">
+        <p class="section-subtitle" data-i18n="catalog.subtitle">
           Eng ommabop xizmatlarimizning shaffof narxlari. Jadvaldan kerakli xizmatni tezkor izlang yoki to'liq katalog matnini yuklab oling.
         </p>
       </div>
@@ -749,15 +755,17 @@
         <div class="catalog-actions-bar">
           <div class="catalog-search-wrap">
             <i data-lucide="search" class="catalog-search-icon"></i>
-            <input type="text" id="catalog-search-input" class="catalog-search-input" placeholder="Xizmat nomini izlash (masalan, UV DTF, Banner)...">
+            <input type="text" id="catalog-search-input" class="catalog-search-input" placeholder="Xizmat nomini izlash (masalan, UV DTF, Banner)..." data-i18n-placeholder="catalog.search_placeholder">
           </div>
 
           <div style="display: flex; gap: 10px;">
             <button class="btn-primary btn-sm" onclick="triggerCatalogDownload()">
-              <i data-lucide="download"></i> Katalog faylini yuklab olish
+              <i data-lucide="download"></i>
+              <span data-i18n="catalog.btn_download">Katalog faylini yuklab olish</span>
             </button>
             <button class="btn-secondary btn-sm" onclick="openOrderModal()">
-              <i data-lucide="shopping-cart"></i> Buyurtma berish
+              <i data-lucide="shopping-cart"></i>
+              <span data-i18n="catalog.btn_order">Buyurtma berish</span>
             </button>
           </div>
         </div>
@@ -766,48 +774,48 @@
           <table class="catalog-table-full">
             <thead>
               <tr>
-                <th>Xizmat Nomi</th>
-                <th>O'lcham / Format</th>
-                <th>Tayyorlanish Muddati</th>
-                <th>Narxi</th>
-                <th style="text-align: right;">Harakat</th>
+                <th data-i18n="catalog.th_name">Xizmat Nomi</th>
+                <th data-i18n="catalog.th_format">O'lcham / Format</th>
+                <th data-i18n="catalog.th_time">Tayyorlanish Muddati</th>
+                <th data-i18n="catalog.th_price">Narxi</th>
+                <th style="text-align: right;" data-i18n="catalog.th_action">Harakat</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
-                  <div class="catalog-service-name">UV DTF Pechat (Kichik format)</div>
-                  <div class="catalog-service-desc">Yuvilmaydigan suvga chidamli relyefli stiker</div>
+                  <div class="catalog-service-name" data-i18n="s1.title">UV DTF Pechat</div>
+                  <div class="catalog-service-desc" data-i18n="s1.f1">Suvga va tirnalishga 100% chidamli</div>
                 </td>
                 <td>A4 (21 x 29.7 cm)</td>
-                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> 24 soat</span></td>
+                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> <span data-i18n="catalog.time_24h">24 soat</span></span></td>
                 <td><span class="catalog-price-badge">25,000 UZS</span></td>
                 <td style="text-align: right;">
-                  <button class="btn-secondary btn-sm" onclick="openOrderModal('UV DTF A4')">Tanlash</button>
+                  <button class="btn-secondary btn-sm" onclick="openOrderModal('UV DTF A4')" data-i18n="catalog.btn_select">Tanlash</button>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div class="catalog-service-name">UV DTF Pechat (Katta format)</div>
-                  <div class="catalog-service-desc">Katta hajmdagi stikerlar va logotiplar uchun</div>
+                  <div class="catalog-service-name" data-i18n="s1.title">UV DTF Pechat</div>
+                  <div class="catalog-service-desc" data-i18n="s1.f2">A4 va A3 formatlarda chop etish</div>
                 </td>
                 <td>A3 (29.7 x 42 cm)</td>
-                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> 24 soat</span></td>
+                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> <span data-i18n="catalog.time_24h">24 soat</span></span></td>
                 <td><span class="catalog-price-badge">45,000 UZS</span></td>
                 <td style="text-align: right;">
-                  <button class="btn-secondary btn-sm" onclick="openOrderModal('UV DTF A3')">Tanlash</button>
+                  <button class="btn-secondary btn-sm" onclick="openOrderModal('UV DTF A3')" data-i18n="catalog.btn_select">Tanlash</button>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div class="catalog-service-name">Keng Formatli Banner Bosma</div>
-                  <div class="catalog-service-desc">Tashqi reklama, do'kon fasadi va devorlar uchun</div>
+                  <div class="catalog-service-name" data-i18n="s2.title">Keng Formatli Banner & Orakal</div>
+                  <div class="catalog-service-desc" data-i18n="s2.f1">Quyosh nuri va yomg'irga chidamli bo'yoq</div>
                 </td>
                 <td>1 kv.m (100 x 100 cm)</td>
-                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> 24-48 soat</span></td>
+                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> <span data-i18n="catalog.time_48h">24-48 soat</span></span></td>
                 <td><span class="catalog-price-badge">35,000 UZS</span></td>
                 <td style="text-align: right;">
-                  <button class="btn-secondary btn-sm" onclick="openOrderModal('Banner Bosma')">Tanlash</button>
+                  <button class="btn-secondary btn-sm" onclick="openOrderModal('Banner Bosma')" data-i18n="catalog.btn_select">Tanlash</button>
                 </td>
               </tr>
               <tr>
@@ -816,70 +824,70 @@
                   <div class="catalog-service-desc">Oyna, vitrina va avtomobillarga yopishtirish uchun</div>
                 </td>
                 <td>1 kv.m (100 x 100 cm)</td>
-                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> 24 soat</span></td>
+                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> <span data-i18n="catalog.time_24h">24 soat</span></span></td>
                 <td><span class="catalog-price-badge">40,000 UZS</span></td>
                 <td style="text-align: right;">
-                  <button class="btn-secondary btn-sm" onclick="openOrderModal('Orakal Bosma')">Tanlash</button>
+                  <button class="btn-secondary btn-sm" onclick="openOrderModal('Orakal Bosma')" data-i18n="catalog.btn_select">Tanlash</button>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div class="catalog-service-name">3D Yoritgichli Akril Harflar</div>
-                  <div class="catalog-service-desc">Svetovoy do'kon va ofis harflari (LED chiroqlar bilan)</div>
+                  <div class="catalog-service-name" data-i18n="s3.title">3D Yoritgichli Harflar</div>
+                  <div class="catalog-service-desc" data-i18n="s3.f1">Kechasi ajoyib ko'rinuvchi yorqin LED</div>
                 </td>
                 <td>1 sm balandlik</td>
-                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> 3-5 kun</span></td>
+                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> <span data-i18n="catalog.time_days3_5">3-5 kun</span></span></td>
                 <td><span class="catalog-price-badge">12,000 UZS</span></td>
                 <td style="text-align: right;">
-                  <button class="btn-secondary btn-sm" onclick="openOrderModal('3D Yoritgichli Harflar')">Tanlash</button>
+                  <button class="btn-secondary btn-sm" onclick="openOrderModal('3D Yoritgichli Harflar')" data-i18n="catalog.btn_select">Tanlash</button>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div class="catalog-service-name">Moslashuvchan Neon Signboard</div>
-                  <div class="catalog-service-desc">Individual dizayn asosidagi yorqin neon yozuvlar</div>
+                  <div class="catalog-service-name" data-i18n="s4.title">Neon Reklama & Signboards</div>
+                  <div class="catalog-service-desc" data-i18n="s4.f1">Sinmaydigan xavfsiz moslashuvchan neon</div>
                 </td>
                 <td>Individual loyiha</td>
-                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> 2-4 kun</span></td>
+                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> <span data-i18n="catalog.time_days2_4">2-4 kun</span></span></td>
                 <td><span class="catalog-price-badge">350,000 UZS dan</span></td>
                 <td style="text-align: right;">
-                  <button class="btn-secondary btn-sm" onclick="openOrderModal('Neon Signboard')">Tanlash</button>
+                  <button class="btn-secondary btn-sm" onclick="openOrderModal('Neon Signboard')" data-i18n="catalog.btn_select">Tanlash</button>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div class="catalog-service-name">Vizitkalar (Ikki tomonlama)</div>
-                  <div class="catalog-service-desc">300g qalin karton, yuqori sifatli rangli chop etish</div>
+                  <div class="catalog-service-name" data-i18n="s5.title">Vizitkalar (Ikki tomonlama)</div>
+                  <div class="catalog-service-desc" data-i18n="s5.f1">300g qalin qog'oz, mat/глянцевый laminatsiya</div>
                 </td>
                 <td>100 dona</td>
-                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> 24 soat</span></td>
+                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> <span data-i18n="catalog.time_24h">24 soat</span></span></td>
                 <td><span class="catalog-price-badge">60,000 UZS</span></td>
                 <td style="text-align: right;">
-                  <button class="btn-secondary btn-sm" onclick="openOrderModal('Vizitka 100 dona')">Tanlash</button>
+                  <button class="btn-secondary btn-sm" onclick="openOrderModal('Vizitka 100 dona')" data-i18n="catalog.btn_select">Tanlash</button>
                 </td>
               </tr>
               <tr>
                 <td>
                   <div class="catalog-service-name">Ofset Vizitkalar (Katta tiraj)</div>
-                  <div class="catalog-service-desc">Litsiey mat/глянец qoplamali premium vizitkalar</div>
+                  <div class="catalog-service-desc" data-i18n="s5.f2">Raqamli (tezkor) va Ofset (katta tiraj)</div>
                 </td>
                 <td>1000 dona</td>
-                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> 3-4 kun</span></td>
+                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> <span data-i18n="catalog.time_days3_5">3-5 kun</span></span></td>
                 <td><span class="catalog-price-badge">280,000 UZS</span></td>
                 <td style="text-align: right;">
-                  <button class="btn-secondary btn-sm" onclick="openOrderModal('Ofset Vizitka 1000')">Tanlash</button>
+                  <button class="btn-secondary btn-sm" onclick="openOrderModal('Ofset Vizitka 1000')" data-i18n="catalog.btn_select">Tanlash</button>
                 </td>
               </tr>
               <tr>
                 <td>
                   <div class="catalog-service-name">Flayerlar A5 (Ikki tomonlama)</div>
-                  <div class="catalog-service-desc">Aksiya va reklama tarqatmalari uchun ideal</div>
+                  <div class="catalog-service-desc">Aksiya va promo-reklama tarqatmalari uchun</div>
                 </td>
                 <td>500 dona (A5)</td>
-                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> 2-3 kun</span></td>
+                <td><span class="catalog-time-badge"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> <span data-i18n="catalog.time_days2_3">2-3 kun</span></span></td>
                 <td><span class="catalog-price-badge">240,000 UZS</span></td>
                 <td style="text-align: right;">
-                  <button class="btn-secondary btn-sm" onclick="openOrderModal('Flayer 500 dona')">Tanlash</button>
+                  <button class="btn-secondary btn-sm" onclick="openOrderModal('Flayer 500 dona')" data-i18n="catalog.btn_select">Tanlash</button>
                 </td>
               </tr>
             </tbody>
@@ -902,25 +910,25 @@
         <div class="order-info-col">
           <div class="section-tag">
             <span class="section-tag-dot"></span>
-            TEZKOR BOG'LANISH
+            <span data-i18n="order.tag">TEZKOR BOG'LANISH</span>
           </div>
-          <h3>Loyihangizni Biz Bilan Birgalikda Amalga Oshiring!</h3>
-          <p>
+          <h3 data-i18n="order.title">Loyihangizni Biz Bilan Birgalikda Amalga Oshiring!</h3>
+          <p data-i18n="order.desc">
             Aniq narxni hisoblash, o'lcham olish yoki maslahat kerakmi? Telefon raqamingizni qoldiring, mutaxassisimiz 10 daqiqada siz bilan bog'lanadi.
           </p>
 
           <div class="order-trust-points">
             <div class="trust-point">
               <i data-lucide="check-circle-2"></i>
-              <span>Bepul professional maslahat va o'lcham olish</span>
+              <span data-i18n="order.tp1">Bepul professional maslahat va o'lcham olish</span>
             </div>
             <div class="trust-point">
               <i data-lucide="check-circle-2"></i>
-              <span>Har bir buyurtmaga individual yondashuv</span>
+              <span data-i18n="order.tp2">Har bir buyurtmaga individual yondashuv</span>
             </div>
             <div class="trust-point">
               <i data-lucide="check-circle-2"></i>
-              <span>Telegram orqali to'g'ridan-to'g'ri maket almashish</span>
+              <span data-i18n="order.tp3">Telegram orqali to'g'ridan-to'g'ri maket almashish</span>
             </div>
           </div>
         </div>
@@ -928,17 +936,17 @@
         <div class="order-form-col">
           <form onsubmit="handleOrderSubmit(event)" style="display: flex; flex-direction: column; gap: 16px;">
             <div class="form-group">
-              <label class="form-label" for="order-name">Ismingiz *</label>
-              <input type="text" id="order-name" class="form-input" placeholder="Ismingizni kiriting" required>
+              <label class="form-label" for="order-name" data-i18n="order.name_label">Ismingiz *</label>
+              <input type="text" id="order-name" class="form-input" placeholder="Ismingizni kiriting" data-i18n-placeholder="order.name_placeholder" required>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="order-phone">Telefon raqamingiz *</label>
+              <label class="form-label" for="order-phone" data-i18n="order.phone_label">Telefon raqamingiz *</label>
               <input type="tel" id="order-phone" class="form-input" placeholder="+998 90 123 45 67" required>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="order-service-select">Qaysi xizmat qiziqtirmoqda?</label>
+              <label class="form-label" for="order-service-select" data-i18n="order.service_label">Qaysi xizmat qiziqtirmoqda?</label>
               <select id="order-service-select" class="form-select">
                 <option value="UV DTF Pechat">UV DTF Pechat</option>
                 <option value="Keng Formatli Banner">Keng Formatli Banner</option>
@@ -951,12 +959,12 @@
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="order-details">Qo'shimcha izoh / O'lchamlar</label>
-              <textarea id="order-details" class="form-textarea" rows="2" placeholder="Masalan: 2x3m banner kerak yoki 100 dona vizitka..."></textarea>
+              <label class="form-label" for="order-details" data-i18n="order.details_label">Qo'shimcha izoh / O'lchamlar</label>
+              <textarea id="order-details" class="form-textarea" rows="2" placeholder="Masalan: 2x3m banner kerak yoki 100 dona vizitka..." data-i18n-placeholder="order.details_placeholder"></textarea>
             </div>
 
             <button type="submit" class="btn-primary full-width" style="padding: 14px;">
-              <i data-lucide="send"></i> Buyurtma so'rovini yuborish (Telegram)
+              <i data-lucide="send"></i> <span data-i18n="order.submit_btn">Buyurtma so'rovini yuborish (Telegram)</span>
             </button>
           </form>
         </div>
@@ -975,12 +983,12 @@
       <div class="section-header">
         <div class="section-tag">
           <span class="section-tag-dot"></span>
-          MANZIL VA ALOQA
+          <span data-i18n="contacts.tag">MANZIL VA ALOQA</span>
         </div>
-        <h2 class="section-title">
+        <h2 class="section-title" data-i18n="contacts.title">
           Biz Bilan <span class="lime-highlight">Bog'laning</span>
         </h2>
-        <p class="section-subtitle">
+        <p class="section-subtitle" data-i18n="contacts.subtitle">
           Samarqand shahridagi ofisimizga tashrif buyuring yoki telefon va messenjerlar orqali aloqaga chiqing.
         </p>
       </div>
@@ -997,15 +1005,15 @@
                 <i data-lucide="phone"></i>
               </div>
               <div class="contact-card-details">
-                <span class="contact-card-title">Telefon raqamlar</span>
+                <span class="contact-card-title" data-i18n="contacts.phone_title">Telefon raqamlar</span>
                 <div class="contact-phones-col">
                   <a href="tel:+998884169988" class="contact-phone-link">+998 88 416 99 88</a>
                   <a href="tel:+998902846666" class="contact-phone-link">+998 90 284 66 66</a>
                 </div>
               </div>
             </div>
-            <button class="btn-copy" onclick="copyToClipboard('+998884169988', 'Telefon raqam nusxalandi!')">
-              <i data-lucide="copy" style="width: 14px; height: 14px;"></i> Nusxalash
+            <button class="btn-copy" onclick="copyToClipboard('+998884169988 / +998902846666', 'contacts.copied_phone')">
+              <i data-lucide="copy" style="width: 14px; height: 14px;"></i> <span data-i18n="contacts.copy_btn">Nusxalash</span>
             </button>
           </div>
 
@@ -1016,12 +1024,12 @@
                 <i data-lucide="map-pin"></i>
               </div>
               <div class="contact-card-details">
-                <span class="contact-card-title">Manzilimiz</span>
-                <span class="contact-card-val">Samarqand sh., Lohutiy 3, (Brilliant City)</span>
+                <span class="contact-card-title" data-i18n="contacts.address_title">Manzilimiz</span>
+                <span class="contact-card-val" data-i18n="contacts.address_val">Samarqand sh., Lohutiy 3, (Brilliant City)</span>
               </div>
             </div>
-            <button class="btn-copy" onclick="copyToClipboard('Samarqand sh., Lohutiy ko‘chasi 3, Brilliant City', 'Manzil nusxalandi!')">
-              <i data-lucide="copy" style="width: 14px; height: 14px;"></i> Nusxalash
+            <button class="btn-copy" onclick="copyToClipboard('Samarqand sh., Lohutiy ko‘chasi 3, Brilliant City', 'contacts.copied_address')">
+              <i data-lucide="copy" style="width: 14px; height: 14px;"></i> <span data-i18n="contacts.copy_btn">Nusxalash</span>
             </button>
           </div>
 
@@ -1032,9 +1040,9 @@
                 <i data-lucide="clock"></i>
               </div>
               <div class="contact-card-details">
-                <span class="contact-card-title">Ish vaqti</span>
-                <span class="contact-card-val">Dushanba - Shanba: 09:00 - 19:00</span>
-                <span style="font-size: 0.78rem; color: var(--text-dim);">Yakshanba — Dam olish kuni</span>
+                <span class="contact-card-title" data-i18n="contacts.hours_title">Ish vaqti</span>
+                <span class="contact-card-val" data-i18n="contacts.hours_val">Dushanba - Shanba: 09:00 - 19:00</span>
+                <span style="font-size: 0.78rem; color: var(--text-dim);" data-i18n="contacts.hours_sub">Yakshanba — Dam olish kuni</span>
               </div>
             </div>
             <div class="live-status-pill">
@@ -1050,7 +1058,7 @@
                 <i data-lucide="send"></i>
               </div>
               <div class="contact-card-details">
-                <span class="contact-card-title">Ijtimoiy Tarmoqlar</span>
+                <span class="contact-card-title" data-i18n="contacts.social_title">Ijtimoiy Tarmoqlar</span>
                 <span class="contact-card-val">Telegram: @unionprint_uz</span>
                 <span style="font-size: 0.8rem; color: var(--text-dim);">Instagram: @unionprint.uz</span>
               </div>
@@ -1072,8 +1080,8 @@
                 <i data-lucide="smartphone"></i>
               </div>
               <div class="contact-card-details">
-                <span class="contact-card-title" style="color: var(--primary-lime);">Mobil Bio-Havolalar Sahifasi</span>
-                <span style="font-size: 0.82rem; color: var(--text-white);">Instagram/Telegram bio uchun maxsus tezkor sahifa (/bio/)</span>
+                <span class="contact-card-title" style="color: var(--primary-lime);" data-i18n="contacts.bio_title">Mobil Bio-Havolalar Sahifasi</span>
+                <span style="font-size: 0.82rem; color: var(--text-white);" data-i18n="contacts.bio_sub">Instagram/Telegram bio uchun maxsus tezkor sahifa (/bio/)</span>
               </div>
             </div>
             <i data-lucide="arrow-right" style="color: var(--primary-lime);"></i>
@@ -1096,10 +1104,10 @@
 
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
             <span style="font-size: 0.86rem; color: var(--text-muted);">
-              <i data-lucide="navigation" style="color: var(--primary-lime); width: 15px; height: 15px; vertical-align: middle;"></i> Samarqand, Lohutiy 3, Brilliant City
+              <i data-lucide="navigation" style="color: var(--primary-lime); width: 15px; height: 15px; vertical-align: middle;"></i> <span data-i18n="hero.floating_badge">Samarqand, Lohutiy 3, Brilliant City</span>
             </span>
             <a href="https://yandex.uz/maps/-/CTX3MJ-Q" target="_blank" rel="noopener" class="btn-primary btn-sm">
-              <i data-lucide="map"></i> Yandex Maps'da ochish
+              <i data-lucide="map"></i> <span data-i18n="contacts.open_map">Yandex Maps'da ochish</span>
             </a>
           </div>
         </div>
@@ -1120,7 +1128,7 @@
         <!-- Col 1: Brand Info -->
         <div class="footer-brand-col">
           <img src="assets/logo.png" alt="UNION PRINT Logo" class="footer-logo">
-          <p class="footer-about">
+          <p class="footer-about" data-i18n="footer.about">
             UNION PRINT — Sifatli bosma mahsulotlar va tashqi reklama uchun ishonchli hamkor. Zamonaviy uskunalar, tezkor tayyorlash va professional yondashuv.
           </p>
           <div class="footer-social-row">
@@ -1138,33 +1146,33 @@
 
         <!-- Col 2: Services -->
         <div>
-          <h4 class="footer-heading">Xizmatlar</h4>
+          <h4 class="footer-heading" data-i18n="footer.services_heading">Xizmatlar</h4>
           <ul class="footer-nav-list">
-            <li><a href="#services">UV DTF Pechat</a></li>
-            <li><a href="#services">Katta Formatli Banner</a></li>
-            <li><a href="#services">3D Yoritgichli Harflar</a></li>
-            <li><a href="#services">Neon Signboards</a></li>
-            <li><a href="#services">Vizitkalar & Bukletlar</a></li>
-            <li><a href="#services">Grafik Dizayn & Brending</a></li>
+            <li><a href="#services" data-i18n="s1.title">UV DTF Pechat</a></li>
+            <li><a href="#services" data-i18n="s2.title">Katta Formatli Banner</a></li>
+            <li><a href="#services" data-i18n="s3.title">3D Yoritgichli Harflar</a></li>
+            <li><a href="#services" data-i18n="s4.title">Neon Signboards</a></li>
+            <li><a href="#services" data-i18n="s5.title">Vizitkalar & Bukletlar</a></li>
+            <li><a href="#services" data-i18n="s6.title">Grafik Dizayn & Brending</a></li>
           </ul>
         </div>
 
         <!-- Col 3: Quick Navigation -->
         <div>
-          <h4 class="footer-heading">Tezkor Havolalar</h4>
+          <h4 class="footer-heading" data-i18n="footer.links_heading">Tezkor Havolalar</h4>
           <ul class="footer-nav-list">
-            <li><a href="#hero">Bosh sahifa</a></li>
-            <li><a href="#calculator">Onlayn Kalkulyator</a></li>
-            <li><a href="#portfolio">Bizning ishlarimiz</a></li>
-            <li><a href="#advantages">Afzalliklarimiz</a></li>
-            <li><a href="#catalog">Katalog & Narxlar</a></li>
-            <li><a href="bio/">Bio-Link (Taplink)</a></li>
+            <li><a href="#hero" data-i18n="hero.tag_uv">Bosh sahifa</a></li>
+            <li><a href="#calculator" data-i18n="nav.calculator">Onlayn Kalkulyator</a></li>
+            <li><a href="#portfolio" data-i18n="nav.portfolio">Bizning ishlarimiz</a></li>
+            <li><a href="#advantages" data-i18n="nav.advantages">Afzalliklarimiz</a></li>
+            <li><a href="#catalog" data-i18n="nav.catalog">Katalog & Narxlar</a></li>
+            <li><a href="bio/" data-i18n="nav.bio_link">Bio-Link (Taplink)</a></li>
           </ul>
         </div>
 
         <!-- Col 4: Contacts Info -->
         <div>
-          <h4 class="footer-heading">Aloqa</h4>
+          <h4 class="footer-heading" data-i18n="footer.contacts_heading">Aloqa</h4>
           <ul class="footer-nav-list">
             <li style="color: var(--text-muted);"><i data-lucide="phone" style="width: 14px; height: 14px; color: var(--primary-lime); vertical-align: middle;"></i> +998 88 416 99 88</li>
             <li style="color: var(--text-muted);"><i data-lucide="phone" style="width: 14px; height: 14px; color: var(--primary-lime); vertical-align: middle;"></i> +998 90 284 66 66</li>
@@ -1176,11 +1184,11 @@
       </div>
 
       <div class="footer-bottom-bar">
-        <div class="footer-copy-text">
+        <div class="footer-copy-text" data-i18n="footer.copy">
           &copy; 2026 UNION PRINT. Barcha huquqlar himoyalangan. Sifatli bosma mahsulotlar uchun ishonchli hamkor!
         </div>
         <div class="footer-back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
-          <span>Yuqoriga qaytish</span>
+          <span data-i18n="footer.back_to_top">Yuqoriga qaytish</span>
           <i data-lucide="arrow-up" style="width: 16px; height: 16px;"></i>
         </div>
       </div>
@@ -1209,8 +1217,8 @@
           <i data-lucide="layers"></i>
         </div>
         <div>
-          <h2>UNION PRINT Katalogi</h2>
-          <p class="sub-text">Barcha xizmatlar va bosma mahsulotlar narxlari</p>
+          <h2 data-i18n="modal.catalog_title">UNION PRINT Katalogi</h2>
+          <p class="sub-text" data-i18n="modal.catalog_sub">Barcha xizmatlar va bosma mahsulotlar narxlari</p>
         </div>
       </div>
       
@@ -1218,9 +1226,9 @@
         <table class="catalog-table">
           <thead>
             <tr>
-              <th>Xizmat turi</th>
-              <th>Format</th>
-              <th>Narx</th>
+              <th data-i18n="modal.catalog_col_service">Xizmat turi</th>
+              <th data-i18n="modal.catalog_col_format">Format</th>
+              <th data-i18n="modal.catalog_col_price">Narx</th>
             </tr>
           </thead>
           <tbody>
@@ -1265,10 +1273,10 @@
 
       <div class="catalog-actions">
         <button class="btn-primary full-width" onclick="triggerCatalogDownload()">
-          <i data-lucide="download"></i> Katalog faylini yuklab olish
+          <i data-lucide="download"></i> <span data-i18n="catalog.btn_download">Katalog faylini yuklab olish</span>
         </button>
         <a href="https://t.me/unionprint_bot" target="_blank" rel="noopener" class="btn-secondary full-width">
-          <i data-lucide="bot"></i> Telegram Bot orqali buyurtma
+          <i data-lucide="bot"></i> Telegram Bot
         </a>
       </div>
     </div>
@@ -1287,8 +1295,8 @@
           <i data-lucide="phone"></i>
         </div>
         <div>
-          <h2>Telefon Raqamlar</h2>
-          <p class="sub-text">Qo'ng'iroq qilish uchun raqamni tanlang</p>
+          <h2 data-i18n="modal.phone_title">Telefon Raqamlar</h2>
+          <p class="sub-text" data-i18n="modal.phone_sub">Qo'ng'iroq qilish uchun raqamni tanlang</p>
         </div>
       </div>
 
@@ -1299,8 +1307,8 @@
         <a href="tel:+998902846666" class="btn-primary full-width" style="padding: 14px;">
           <i data-lucide="phone-call"></i> +998 90 284 66 66
         </a>
-        <button class="btn-secondary full-width" onclick="copyToClipboard('+998884169988 / +998902846666', 'Raqamlar nusxalandi!')">
-          <i data-lucide="copy"></i> Raqamlarni nusxalash
+        <button class="btn-secondary full-width" onclick="copyToClipboard('+998884169988 / +998902846666', 'contacts.copied_phone')">
+          <i data-lucide="copy"></i> <span data-i18n="contacts.copy_btn">Raqamlarni nusxalash</span>
         </button>
       </div>
     </div>
@@ -1319,22 +1327,22 @@
           <i data-lucide="shopping-bag"></i>
         </div>
         <div>
-          <h2>Buyurtma Berish</h2>
-          <p class="sub-text">So'rovingizni qoldiring, biz darhol bog'lanamiz</p>
+          <h2 data-i18n="modal.order_title">Buyurtma Berish</h2>
+          <p class="sub-text" data-i18n="modal.order_sub">So'rovingizni qoldiring, biz darhol bog'lanamiz</p>
         </div>
       </div>
 
       <form onsubmit="handleOrderSubmit(event)" style="display: flex; flex-direction: column; gap: 14px;">
         <div class="form-group">
-          <label class="form-label" for="modal-order-name">Ismingiz *</label>
-          <input type="text" id="modal-order-name" class="form-input" placeholder="Ismingiz" required>
+          <label class="form-label" for="modal-order-name" data-i18n="order.name_label">Ismingiz *</label>
+          <input type="text" id="modal-order-name" class="form-input" placeholder="Ismingiz" data-i18n-placeholder="order.name_placeholder" required>
         </div>
         <div class="form-group">
-          <label class="form-label" for="modal-order-phone">Telefon raqamingiz *</label>
+          <label class="form-label" for="modal-order-phone" data-i18n="order.phone_label">Telefon raqamingiz *</label>
           <input type="tel" id="modal-order-phone" class="form-input" placeholder="+998 90 123 45 67" required>
         </div>
         <div class="form-group">
-          <label class="form-label" for="modal-order-service">Xizmat turi</label>
+          <label class="form-label" for="modal-order-service" data-i18n="order.service_label">Xizmat turi</label>
           <select id="modal-order-service" class="form-select">
             <option value="UV DTF Pechat">UV DTF Pechat</option>
             <option value="Banner Pechat">Banner Pechat</option>
@@ -1345,12 +1353,12 @@
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label" for="modal-order-details">Qo'shimcha ma'lumot</label>
-          <textarea id="modal-order-details" class="form-textarea" rows="2" placeholder="O'lchamlar yoki maxsus talablar..."></textarea>
+          <label class="form-label" for="modal-order-details" data-i18n="order.details_label">Qo'shimcha ma'lumot</label>
+          <textarea id="modal-order-details" class="form-textarea" rows="2" placeholder="O'lchamlar yoki maxsus talablar..." data-i18n-placeholder="order.details_placeholder"></textarea>
         </div>
 
         <button type="submit" class="btn-primary full-width" style="padding: 14px; margin-top: 6px;">
-          <i data-lucide="send"></i> Telegram orqali yuborish
+          <i data-lucide="send"></i> <span data-i18n="order.submit_btn">Telegram orqali yuborish</span>
         </button>
       </form>
     </div>
@@ -1375,13 +1383,15 @@
           <h3 id="lightbox-title" style="font-size: 1.25rem; font-weight: 750; color: #fff;">Mahsulot Nomi</h3>
         </div>
         <a id="lightbox-order-btn" href="https://t.me/unionprint_uz" target="_blank" rel="noopener" class="btn-primary">
-          <i data-lucide="shopping-cart"></i> Xuddi shunday buyurtma berish
+          <i data-lucide="shopping-cart"></i> <span data-i18n="modal.lightbox_btn">Xuddi shunday buyurtma berish</span>
         </a>
       </div>
     </div>
   </div>
 
+  <!-- Translations Dictionary Script -->
+  <script src="translations.js?v=4.2"></script>
   <!-- Main JavaScript File -->
-  <script src="script.js?v=4.0"></script>
+  <script src="script.js?v=4.2"></script>
 </body>
 </html>

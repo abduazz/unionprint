@@ -47,7 +47,7 @@ jobs:
       - name: 📦 Prepare main site files
         run: |
           mkdir -p ./deploy_main
-          cp -r index.html style.css script.js favicon.ico assets bio ./deploy_main/
+          cp -r index.html style.css script.js translations.js favicon.ico assets bio ./deploy_main/
 
       - name: 🚀 Upload Main Site to Server
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
